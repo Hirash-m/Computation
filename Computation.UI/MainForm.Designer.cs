@@ -30,6 +30,8 @@
         {
             menuStrip1 = new MenuStrip();
             testToolStripMenuItem = new ToolStripMenuItem();
+            اشخاصToolStripMenuItem = new ToolStripMenuItem();
+            نوعToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -44,9 +46,25 @@
             // 
             // testToolStripMenuItem
             // 
+            testToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { اشخاصToolStripMenuItem });
             testToolStripMenuItem.Name = "testToolStripMenuItem";
-            testToolStripMenuItem.Size = new Size(38, 20);
-            testToolStripMenuItem.Text = "test";
+            testToolStripMenuItem.Size = new Size(80, 20);
+            testToolStripMenuItem.Text = "اطلاعات پایه";
+            // 
+            // اشخاصToolStripMenuItem
+            // 
+            اشخاصToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { نوعToolStripMenuItem });
+            اشخاصToolStripMenuItem.Name = "اشخاصToolStripMenuItem";
+            اشخاصToolStripMenuItem.Size = new Size(180, 22);
+            اشخاصToolStripMenuItem.Text = "اشخاص";
+            اشخاصToolStripMenuItem.Click += اشخاصToolStripMenuItem_Click;
+            // 
+            // نوعToolStripMenuItem
+            // 
+            نوعToolStripMenuItem.Name = "نوعToolStripMenuItem";
+            نوعToolStripMenuItem.Size = new Size(180, 22);
+            نوعToolStripMenuItem.Text = "نوع";
+            نوعToolStripMenuItem.Click += نوعToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -57,6 +75,7 @@
             Font = new Font("Tahoma", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
+            RightToLeft = RightToLeft.Yes;
             Text = "MainForm";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -68,5 +87,7 @@
 
         private MenuStrip menuStrip1;
         private ToolStripMenuItem testToolStripMenuItem;
+        private ToolStripMenuItem اشخاصToolStripMenuItem;
+        private ToolStripMenuItem نوعToolStripMenuItem;
     }
 }
