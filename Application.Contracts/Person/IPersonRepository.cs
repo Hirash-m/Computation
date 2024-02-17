@@ -1,6 +1,10 @@
-﻿namespace Application.Contracts.Person
+﻿
+
+
+namespace Application.Contracts.Person
+
 {
-    public interface IPersonRepository
+    public interface IPersonRepository 
     {
         List<PersonView> GetPersons();
     }

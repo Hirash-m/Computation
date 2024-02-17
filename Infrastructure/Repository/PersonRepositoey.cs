@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
-    public class PersonRepository : IPersonRepository
+    public class PersonRepository : BaseRepository<Person, int> , IPersonRepository
     {
         private readonly ComputationContext ctx;
 
-        public PersonRepository(ComputationContext ctx)
+        public PersonRepository(ComputationContext ctx) :base(ctx) 
         {
             this.ctx = ctx;
         }

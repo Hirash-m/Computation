@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utility.App;
 
 namespace Application
 {
@@ -15,6 +16,24 @@ namespace Application
         {
             this.personTypeRepository = personTypeRepository;
         }
+
+        public OperationResult AddPersonType(PersonTypeAdd command)
+        {
+            var operation = new OperationResult();
+            var existingPersonType = personTypeRepository.GetPersonTypes().FirstOrDefault(p => p.Name == command.Name);
+
+            if (existingPersonType != null)
+            {
+               return operation.Failed("نوع تکراری میباشد .");
+            }
+
+            personTypeRepository.Add(command);
+
+            return operation.Succeeded();
+
+
+        }
+
         public List<PersonTypeView> GetPersonTypes()
         {
            return personTypeRepository.GetPersonTypes();

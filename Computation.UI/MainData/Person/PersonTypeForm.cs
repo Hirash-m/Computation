@@ -1,4 +1,5 @@
-﻿using Infrastructure;
+﻿using Application.Contracts.PersonType;
+using Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +23,22 @@ namespace Computation.UI.MainData.Person
         {
             using (var unit = new UnitOfWork())
             {
-                dataGridView1.DataSource=unit.PersonTypeApp.GetPersonTypes();
+                dataGridView1.DataSource = unit.PersonTypeApp.GetPersonTypes();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string name = textBox1.Text;
+            if (!string.IsNullOrEmpty(name))
+            {
+                var persontypeadd = new PersonTypeAdd() { Name = name };
+                using (var unit = new UnitOfWork())
+                {
+                    unit.PersonTypeApp.AddPersonType(persontypeadd);
+                    dataGridView1.DataSource = unit.PersonTypeApp.GetPersonTypes();
+                }
+                textBox1.Text = null;
             }
         }
     }
