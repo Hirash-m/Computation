@@ -1,10 +1,11 @@
 ﻿using Application;
 using Application.Contracts.Person;
 using Application.Contracts.PersonType;
+using Infrastructure.IRepository;
 using Infrastructure.Models;
 using Infrastructure.Repository;
 
-namespace Infrastructure
+namespace Computation.UI
 {
     public class UnitOfWork : IDisposable
     {

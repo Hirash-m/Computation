@@ -1,9 +1,6 @@
 ﻿using Application.Contracts.PersonType;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Infrastructure.IRepository;
+using Infrastructure.Models;
 using Utility.App;
 
 namespace Application
@@ -17,7 +14,7 @@ namespace Application
             this.personTypeRepository = personTypeRepository;
         }
 
-        public OperationResult AddPersonType(PersonTypeAdd command)
+        public OperationResult AddPersonType(Infrastructure.Models.PersonType command)
         {
             var operation = new OperationResult();
             var existingPersonType = personTypeRepository.GetPersonTypes().FirstOrDefault(p => p.Name == command.Name);
@@ -34,9 +31,25 @@ namespace Application
 
         }
 
+       
+
         public List<PersonTypeView> GetPersonTypes()
         {
-           return personTypeRepository.GetPersonTypes();
+            var personTypes = personTypeRepository.GetPersonTypes();
+            List<PersonTypeView> personTypeViews = new List<PersonTypeView>();
+
+            foreach (var personType in personTypes)
+            {
+                PersonTypeView personTypeView = new PersonTypeView
+                {
+                    Id = personType.Id,
+                    Name = personType.Name
+                };
+
+                personTypeViews.Add(personTypeView);
+            }
+
+            return personTypeViews;
         }
     }
 }

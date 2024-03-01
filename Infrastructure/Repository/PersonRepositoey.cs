@@ -1,10 +1,6 @@
-﻿using Application.Contracts.Person;
+﻿using Infrastructure.IRepository;
 using Infrastructure.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Infrastructure.Repository
 {
@@ -17,14 +13,9 @@ namespace Infrastructure.Repository
             this.ctx = ctx;
         }
 
-        public List<PersonView> GetPersons()
+        public List<Person> GetPersons()
         {
-           return ctx.Persons.Select(c => new PersonView
-            {
-                ID = c.Id,
-                Name = c.Name,
-                Family = c.Family
-            }).ToList();
+           return ctx.Persons.ToList();
         }
     }
 }

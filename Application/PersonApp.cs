@@ -1,4 +1,7 @@
 ﻿using Application.Contracts.Person;
+using Application.Contracts.PersonType;
+using Infrastructure.IRepository;
+using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +21,22 @@ namespace Application
 
         public List<PersonView> GetPersons()
         {
-            return personRepository.GetPersons();
+            var persons = personRepository.GetPersons();
+            List<PersonView> personViews = new List<PersonView>();
+
+            foreach (var person in persons)
+            {
+                PersonView personView = new PersonView
+                {
+                    ID = person.Id,
+                    Name = person.Name,
+                    Family=person.Family
+                };
+
+                personViews.Add(personView);
+            }
+
+            return personViews;
         }
     }
 }

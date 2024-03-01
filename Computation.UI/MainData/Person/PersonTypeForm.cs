@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.PersonType;
 using Infrastructure;
+using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,7 +33,7 @@ namespace Computation.UI.MainData.Person
             string name = textBox1.Text;
             if (!string.IsNullOrEmpty(name))
             {
-                var persontypeadd = new PersonTypeAdd() { Name = name };
+                var persontypeadd = new PersonType() { Name = name };
                 using (var unit = new UnitOfWork())
                 {
                     unit.PersonTypeApp.AddPersonType(persontypeadd);

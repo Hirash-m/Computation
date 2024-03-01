@@ -1,10 +1,7 @@
-﻿using Application.Contracts.PersonType;
+﻿
+using Infrastructure.IRepository;
 using Infrastructure.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Infrastructure.Repository
 {
@@ -17,7 +14,7 @@ namespace Infrastructure.Repository
             this.ctx = ctx;
         }
 
-        public bool Add(PersonTypeAdd command)
+        public bool Add(PersonType command)
         {
             var personType = new PersonType { Name = command.Name};
             ctx.PersonTypes.Add(personType);
@@ -26,13 +23,9 @@ namespace Infrastructure.Repository
 
         }
 
-        public List<PersonTypeView> GetPersonTypes()
+        public List<PersonType> GetPersonTypes()
         {
-            return ctx.PersonTypes.Select(c => new PersonTypeView
-            {
-                Id = c.Id,
-                Name = c.Name
-            }).ToList();
+            return ctx.PersonTypes.ToList();
         }
     }
 }

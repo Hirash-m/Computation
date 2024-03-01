@@ -1,6 +1,7 @@
 ﻿using Application;
 using Application.Contracts.Person;
 using Computation.UI.MainData.Person;
+using Infrastructure.IRepository;
 using Infrastructure.Models;
 using Infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;
