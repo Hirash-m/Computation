@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using DevExpress.XtraEditors;
 using DevExpress.Mvvm.Native;
 using DevExpress.Utils.Extensions;
+using System.ComponentModel;
 
 
 namespace Computation.UI.Forms.Person
@@ -31,18 +32,9 @@ namespace Computation.UI.Forms.Person
         {
             using (var unit = new UnitOfWork())
             {
-                var personTypes = unit.PersonTypeApp.GetPersonTypes();
+                var personTypes = new BindingList<PersonTypeView>(unit.PersonTypeApp.GetPersonTypes());
 
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Id", typeof(int));
-                dt.Columns.Add("Name", typeof(string));
-
-                foreach (var personType in personTypes)
-                {
-                    dt.Rows.Add(personType.Id, personType.Name);
-                }
-
-                gridControl.DataSource = dt;
+                gridControl.DataSource = personTypes;
             }
         }
 
@@ -50,23 +42,28 @@ namespace Computation.UI.Forms.Person
 
         private void AddRow_Click(object sender, EventArgs e)
         {
+            BindingList<PersonTypeView> personTypes = gridControl.DataSource as BindingList<PersonTypeView>;
 
-            DataTable added = gridControl.DataSource as DataTable;
-            
-            foreach (DataRow row in added.Rows)
+            foreach (PersonTypeView personType in personTypes)
             {
-
                 using (var unit = new UnitOfWork())
                 {
-                    if (row.RowState == DataRowState.Added)
+                    if (personType.Id == 0)
                     {
-                        var personType = new PersonType() { Name = row["Name"].ToString() };
-                        unit.PersonTypeApp.AddPersonType(personType);
+                        var newPersonType = new PersonType() { Name = personType.Name };
+                        var result = unit.PersonTypeApp.AddPersonType(newPersonType);
+
+                        if (!result.IsSucceeded)
+                        {
+                            MessageBox.Show(result.Message, "خطا", MessageBoxButtons.OK);
+                        }
                     }
                 }
             }
+
             PersonTypesForm_Load(sender, e);
         }
+
 
 
 
