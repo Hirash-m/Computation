@@ -31,7 +31,21 @@ namespace Application
 
         }
 
-       
+        public OperationResult DeletePersonType(byte id)
+        {
+            var operation = new OperationResult();
+            var status = personTypeRepository.ExistById(id);
+            if (status)
+            {
+                personTypeRepository.DeleteById(id);
+                return operation.Succeeded();
+            }
+            else
+            {
+                return operation.Failed("مورد انتخاب شده وجود ندارد");
+            }
+
+        }
 
         public List<PersonTypeView> GetPersonTypes()
         {

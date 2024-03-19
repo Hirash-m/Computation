@@ -6,5 +6,7 @@ namespace Application.Contracts.PersonType
     {
         List<PersonTypeView> GetPersonTypes();
         OperationResult AddPersonType(Infrastructure.Models.PersonType command);
+
+        OperationResult DeletePersonType(byte id);
     }
 }

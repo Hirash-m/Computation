@@ -30,13 +30,13 @@
         {
             components = new System.ComponentModel.Container();
             gridControl = new DevExpress.XtraGrid.GridControl();
+            personTypeAppBindingSource = new BindingSource(components);
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             AddRow = new DevExpress.XtraEditors.SimpleButton();
             DeleteRow = new DevExpress.XtraEditors.SimpleButton();
-            personTypeAppBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)gridControl).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)personTypeAppBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             SuspendLayout();
             // 
             // gridControl
@@ -50,6 +50,10 @@
             gridControl.Size = new Size(351, 319);
             gridControl.TabIndex = 0;
             gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
+            // 
+            // personTypeAppBindingSource
+            // 
+            personTypeAppBindingSource.DataSource = typeof(Application.PersonTypeApp);
             // 
             // gridView1
             // 
@@ -73,10 +77,7 @@
             DeleteRow.Size = new Size(75, 23);
             DeleteRow.TabIndex = 2;
             DeleteRow.Text = "حذف";
-            // 
-            // personTypeAppBindingSource
-            // 
-            personTypeAppBindingSource.DataSource = typeof(Application.PersonTypeApp);
+            DeleteRow.Click += DeleteRow_Click;
             // 
             // PersonTypesForm
             // 
@@ -91,8 +92,8 @@
             Text = "PersonTypesForm";
             Shown += PersonTypesForm_Load;
             ((System.ComponentModel.ISupportInitialize)gridControl).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)personTypeAppBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             ResumeLayout(false);
         }
 

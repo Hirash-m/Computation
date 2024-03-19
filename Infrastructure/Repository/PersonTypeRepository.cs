@@ -5,7 +5,7 @@ using Infrastructure.Models;
 
 namespace Infrastructure.Repository
 {
-    public class PersonTypeRepository : BaseRepository<PersonType, int> , IPersonTypeRepository
+    public class PersonTypeRepository : BaseRepository<PersonType, byte> , IPersonTypeRepository 
     {
         private readonly ComputationContext ctx;
 

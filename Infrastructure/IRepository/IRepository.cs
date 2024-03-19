@@ -18,6 +18,10 @@ namespace Infrastructure.IRepository
         void DeleteAll(IEnumerable<T> entities);
 
         bool Exist(Expression<Func<T, bool>> expression);
+
+        void DeleteById(TKey id);
+
+        bool ExistById(TKey id);
         void SaveChanges();
     }
 

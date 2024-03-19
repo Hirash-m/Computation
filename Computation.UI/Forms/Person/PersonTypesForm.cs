@@ -10,6 +10,8 @@ using DevExpress.XtraEditors;
 using DevExpress.Mvvm.Native;
 using DevExpress.Utils.Extensions;
 using System.ComponentModel;
+using System.Windows.Forms;
+using DevExpress.XtraExport.Helpers;
 
 
 namespace Computation.UI.Forms.Person
@@ -20,13 +22,13 @@ namespace Computation.UI.Forms.Person
         {
             InitializeComponent();
 
-           
-           
+
+
         }
 
-       
 
-      
+
+
 
         private void PersonTypesForm_Load(object sender, EventArgs e)
         {
@@ -36,6 +38,8 @@ namespace Computation.UI.Forms.Person
 
                 gridControl.DataSource = personTypes;
             }
+
+            gridView1.Columns["Id"].OptionsColumn.AllowFocus = false;
         }
 
 
@@ -64,10 +68,32 @@ namespace Computation.UI.Forms.Person
             PersonTypesForm_Load(sender, e);
         }
 
+        private void DeleteRow_Click(object sender, EventArgs e)
+        {
+
+            if (gridView1.SelectedRowsCount > 0)
+            {
 
 
+                byte selectedRowId = (byte)gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Id");
 
+                var mBox = MessageBox.Show($"از حذف رکورد با آی دی {selectedRowId} مطمئن هستید ؟", "اخطار", MessageBoxButtons.YesNo);
 
+                if (mBox == DialogResult.Yes)
+                {
+                    using (var unit = new UnitOfWork())
+                    {
+                        unit.PersonTypeApp.DeletePersonType(selectedRowId);
+                        unit.Save();
+                    }
+                    PersonTypesForm_Load(sender, e);
+                }
+            }
+            else
+            {
+                MessageBox.Show(".لطفا یک ردیف را انتخاب نمایید", "اخطار");
+            }
+        }
 
     }
 }

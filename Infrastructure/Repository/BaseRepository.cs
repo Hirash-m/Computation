@@ -28,10 +28,34 @@ namespace Infrastructure.Repository
             throw new NotImplementedException();
         }
 
+        public void DeleteById(TKey id)
+        {
+            var entity = Get(id);
+
+            Delete(entity);
+        }
+
         public bool Exist(Expression<Func<T, bool>> expression)
         {
             return context.Set<T>().Any(expression);
         }
+
+        public bool ExistById(TKey id)
+        {
+            
+            var entity = context.Set<T>().Find(id);
+
+            
+            if (entity != null)
+            {
+                return true;
+            }
+
+            
+            return false;
+        }
+
+      
 
         public T Get(TKey id)
         {
