@@ -6,5 +6,6 @@ namespace Infrastructure.IRepository
     {
         List<PersonType> GetPersonTypes();
         bool Add(PersonType command);
+       
     }
 }

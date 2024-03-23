@@ -12,6 +12,7 @@ using DevExpress.Utils.Extensions;
 using System.ComponentModel;
 using System.Windows.Forms;
 using DevExpress.XtraExport.Helpers;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
 
 namespace Computation.UI.Forms.Person
@@ -22,11 +23,35 @@ namespace Computation.UI.Forms.Person
         {
             InitializeComponent();
 
-
+            gridView1.MouseDown += GridView1_MouseDown; ;
 
         }
 
+        private void GridView1_MouseDown(object? sender, MouseEventArgs e)
+        {
 
+            DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+
+            if (e.Button == MouseButtons.Right && view != null)
+            {
+                GridHitInfo hitInfo = view.CalcHitInfo(e.Location);
+
+                if (hitInfo.InRow)
+                {
+                    view.FocusedRowHandle = hitInfo.RowHandle;
+
+                    // Get the data of the focused row
+                    PersonTypeView selectedPerson = view.GetRow(hitInfo.RowHandle) as PersonTypeView;
+
+                    if (selectedPerson != null)
+                    {
+                        // Open the edit form and pass the data of the focused row
+                        PersonTypeEditForm editForm = new PersonTypeEditForm(selectedPerson);
+                        editForm.ShowDialog(); // Show the edit form as a dialog
+                    }
+                }
+            }
+        }
 
 
 
@@ -40,6 +65,7 @@ namespace Computation.UI.Forms.Person
             }
 
             gridView1.Columns["Id"].OptionsColumn.AllowFocus = false;
+            
         }
 
 
@@ -95,5 +121,9 @@ namespace Computation.UI.Forms.Person
             }
         }
 
+        private void PersonTypesForm_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

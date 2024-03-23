@@ -10,6 +10,12 @@ public partial class PersonType
     public string? Name { get; set; }
 
     public virtual ICollection<Person> People { get; set; } = new List<Person>();
+    public void Edit(byte id, string name) 
+    {
+        Id = id;
+        Name = name;
+    
+    }
 
- 
+
 }

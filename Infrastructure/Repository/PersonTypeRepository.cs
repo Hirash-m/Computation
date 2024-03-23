@@ -23,6 +23,8 @@ namespace Infrastructure.Repository
 
         }
 
+        
+
         public List<PersonType> GetPersonTypes()
         {
             return ctx.PersonTypes.ToList();

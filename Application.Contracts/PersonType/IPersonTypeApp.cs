@@ -8,5 +8,6 @@ namespace Application.Contracts.PersonType
         OperationResult AddPersonType(Infrastructure.Models.PersonType command);
 
         OperationResult DeletePersonType(byte id);
+        OperationResult EditPersonType(PersonTypeView command);
     }
 }

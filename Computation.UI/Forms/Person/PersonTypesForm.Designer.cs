@@ -57,9 +57,15 @@
             // 
             // gridView1
             // 
+            gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFullFocus;
             gridView1.GridControl = gridControl;
+            gridView1.GroupPanelText = "test";
             gridView1.Name = "gridView1";
+            gridView1.OptionsCustomization.AllowGroup = false;
+            gridView1.OptionsMenu.EnableGroupPanelMenu = false;
+            gridView1.OptionsView.AllowHtmlDrawGroups = false;
             gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
+            gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // AddRow
             // 
@@ -90,6 +96,7 @@
             MaximizeBox = false;
             Name = "PersonTypesForm";
             Text = "PersonTypesForm";
+            Load += PersonTypesForm_Load_1;
             Shown += PersonTypesForm_Load;
             ((System.ComponentModel.ISupportInitialize)gridControl).EndInit();
             ((System.ComponentModel.ISupportInitialize)personTypeAppBindingSource).EndInit();

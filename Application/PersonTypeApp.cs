@@ -47,6 +47,23 @@ namespace Application
 
         }
 
+        public OperationResult EditPersonType(PersonTypeView command)
+        {
+            var operation = new OperationResult();
+            var personType = personTypeRepository.Get(command.Id);
+            var existingPersonType = personTypeRepository.GetPersonTypes().FirstOrDefault(p => p.Name == command.Name);
+            if (existingPersonType != null)
+            {
+                return operation.Failed("نوع تکراری میباشد .");
+            }
+            else
+            {
+                personType.Edit(command.Id, command.Name);
+                personTypeRepository.SaveChanges();
+                return operation.Succeeded();
+            }
+        }
+
         public List<PersonTypeView> GetPersonTypes()
         {
             var personTypes = personTypeRepository.GetPersonTypes();
