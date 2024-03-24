@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utility.App;
 
 namespace Application
 {
@@ -19,6 +20,10 @@ namespace Application
             this.personRepository = personRepository;
         }
 
+
+
+
+
         public List<PersonView> GetPersons()
         {
             var persons = personRepository.GetPersons();
@@ -30,13 +35,38 @@ namespace Application
                 {
                     ID = person.Id,
                     Name = person.Name,
-                    Family=person.Family
+                    Family = person.Family,
+                    PersonTypeName = person.Type.Name,
+                    NationalCode= person.NationalCode,
+                    Email =person.Email
+                   
                 };
 
                 personViews.Add(personView);
             }
 
             return personViews;
+        }
+
+        public OperationResult PersonAdd(PersonAdd personAdd)
+        {
+
+            var newPerson = new Person
+            {
+                Name = personAdd.Name,
+                Family = personAdd.Family,
+                TypeId = personAdd.TypeId,
+                NationalCode = personAdd.NationalCode,
+                Email = personAdd.Email
+
+            };
+
+            var opersation = new OperationResult();
+            personRepository.AddPerson(newPerson);
+
+
+
+            return opersation.Succeeded();
         }
     }
 }

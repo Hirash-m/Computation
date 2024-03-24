@@ -103,7 +103,7 @@ namespace Computation.UI.Forms.Person
 
                 byte selectedRowId = (byte)gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Id");
 
-                var mBox = MessageBox.Show($"از حذف رکورد با آی دی {selectedRowId} مطمئن هستید ؟", "اخطار", MessageBoxButtons.YesNo);
+                var mBox = MessageBox.Show($"از حذف رکورد با کد {selectedRowId} مطمئن هستید ؟", "اخطار", MessageBoxButtons.YesNo);
 
                 if (mBox == DialogResult.Yes)
                 {
@@ -121,9 +121,6 @@ namespace Computation.UI.Forms.Person
             }
         }
 
-        private void PersonTypesForm_Load_1(object sender, EventArgs e)
-        {
-
-        }
+      
     }
 }

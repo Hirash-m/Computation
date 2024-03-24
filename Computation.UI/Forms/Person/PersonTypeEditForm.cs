@@ -16,7 +16,7 @@ namespace Computation.UI.Forms.Person
 {
     public partial class PersonTypeEditForm : DevExpress.XtraEditors.XtraForm
     {
-        private  PersonTypeView _personTypeView;
+        private PersonTypeView _personTypeView;
 
         public PersonTypeEditForm(PersonTypeView personTypeView)
         {
@@ -29,30 +29,32 @@ namespace Computation.UI.Forms.Person
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (_personTypeView.Name != textBox1.Text.ToString())
+            PersonTypeView updatedPersonTypeView = new PersonTypeView
             {
+                Id = _personTypeView.Id,
+                Name = textBox1.Text
+            };
 
-                _personTypeView.Name = textBox1.Text.ToString();
-                var f = textBox1.Text;
+            if (updatedPersonTypeView.Name != _personTypeView.Name)
+            {
                 using (UnitOfWork unit = new UnitOfWork())
                 {
-                  var result =  unit.PersonTypeApp.EditPersonType(_personTypeView);
+                    var result = unit.PersonTypeApp.EditPersonType(updatedPersonTypeView);
 
                     if (!result.IsSucceeded)
                     {
                         MessageBox.Show(result.Message, "خطا", MessageBoxButtons.OK);
-
                     }
-
+                    else
+                    {
+                        _personTypeView.Name = updatedPersonTypeView.Name; 
+                    }
                 }
-               
-               
-
             }
 
-
             this.Close();
-          
         }
+
+
     }
 }

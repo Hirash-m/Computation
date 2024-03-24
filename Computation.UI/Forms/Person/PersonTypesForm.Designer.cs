@@ -96,7 +96,7 @@
             MaximizeBox = false;
             Name = "PersonTypesForm";
             Text = "PersonTypesForm";
-            Load += PersonTypesForm_Load_1;
+            Load += PersonTypesForm_Load;
             Shown += PersonTypesForm_Load;
             ((System.ComponentModel.ISupportInitialize)gridControl).EndInit();
             ((System.ComponentModel.ISupportInitialize)personTypeAppBindingSource).EndInit();

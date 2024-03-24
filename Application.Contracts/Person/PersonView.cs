@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Application.Contracts.Person
 {
@@ -17,6 +15,22 @@ namespace Application.Contracts.Person
 
         [DisplayName("نام خانوادگی")]
         public string Family { get; set; }
+        [DisplayName("نوع شخص")]
+        public string PersonTypeName { get; set; }
+
+        [DisplayName("کد ملی")]
+        public string NationalCode { get; set; }
+
+        [DisplayName("ایمیل")]
+        public string Email { get; set; }
+
+
+
+    }
+
+    public class PersonAdd : PersonView
+    {
+        public byte TypeId { get; set; }
 
     }
 }

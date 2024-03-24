@@ -3,8 +3,9 @@
 namespace Infrastructure.IRepository
 
 {
-    public interface IPersonRepository
+    public interface IPersonRepository : IRepository< Person , int>
     {
         List<Person> GetPersons();
+        bool AddPerson(Person person);
     }
 }

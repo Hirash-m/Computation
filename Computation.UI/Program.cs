@@ -12,7 +12,7 @@ namespace Computation.UI
            
 
             ApplicationConfiguration.Initialize();
-            System.Windows.Forms.Application.Run(new PersonTypesForm());
+            System.Windows.Forms.Application.Run(new PersonsForm());
             
         }
     }
