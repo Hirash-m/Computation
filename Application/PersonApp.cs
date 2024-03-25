@@ -38,7 +38,9 @@ namespace Application
                     Family = person.Family,
                     PersonTypeName = person.Type.Name,
                     NationalCode= person.NationalCode,
-                    Email =person.Email
+                    Email =person.Email,
+                    personType =person.Type
+
                    
                 };
 
@@ -67,6 +69,17 @@ namespace Application
 
 
             return opersation.Succeeded();
+        }
+
+        public OperationResult PersonEdit(PersonAdd personAdd)
+        {
+            var operation = new OperationResult();
+            var Person = personRepository.Get(personAdd.ID);
+
+            Person.Edit(personAdd.ID, personAdd.Name, personAdd.Family,
+                personAdd.NationalCode, personAdd.TypeId, personAdd.Email);
+            personRepository.SaveChanges();
+            return operation.Succeeded();
         }
     }
 }

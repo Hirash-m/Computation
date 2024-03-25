@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            comboBox1 = new ComboBox();
+            personTypeAppBindingSource = new BindingSource(components);
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             EmailText = new DevExpress.XtraEditors.TextEdit();
             NationalCodeText = new DevExpress.XtraEditors.TextEdit();
-            comboBox1 = new ComboBox();
             simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             FamilyText = new DevExpress.XtraEditors.TextEdit();
             NameText = new DevExpress.XtraEditors.TextEdit();
@@ -44,6 +46,7 @@
             emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            ((System.ComponentModel.ISupportInitialize)personTypeAppBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)EmailText.Properties).BeginInit();
@@ -60,6 +63,20 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
             SuspendLayout();
+            // 
+            // comboBox1
+            // 
+            comboBox1.DataSource = personTypeAppBindingSource;
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(12, 36);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(196, 21);
+            comboBox1.TabIndex = 4;
+            // 
+            // personTypeAppBindingSource
+            // 
+            personTypeAppBindingSource.DataSource = typeof(Application.PersonTypeApp);
             // 
             // layoutControl1
             // 
@@ -94,15 +111,6 @@
             NationalCodeText.Size = new Size(197, 20);
             NationalCodeText.StyleController = layoutControl1;
             NationalCodeText.TabIndex = 3;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(12, 36);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(196, 21);
-            comboBox1.TabIndex = 4;
-            comboBox1.Text = "نوع";
             // 
             // simpleButton1
             // 
@@ -223,6 +231,7 @@
             Name = "PersonAddForm";
             Text = "PersonAddForm";
             Load += PersonAddForm_Load;
+            ((System.ComponentModel.ISupportInitialize)personTypeAppBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)EmailText.Properties).EndInit();
@@ -261,5 +270,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraEditors.TextEdit EmailText;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private BindingSource personTypeAppBindingSource;
     }
 }

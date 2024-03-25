@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace Application.Contracts.Person
@@ -23,8 +24,8 @@ namespace Application.Contracts.Person
 
         [DisplayName("ایمیل")]
         public string Email { get; set; }
-
-
+        [Browsable(false)]
+        public Infrastructure.Models.PersonType personType {  get; set; } 
 
     }
 

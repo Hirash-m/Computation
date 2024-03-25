@@ -8,5 +8,7 @@ namespace Application.Contracts.Person
     {
         List<PersonView> GetPersons();
         OperationResult PersonAdd(PersonAdd personAdd);
+        OperationResult PersonEdit(PersonAdd personAdd);
+
     }
 }

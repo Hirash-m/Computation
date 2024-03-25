@@ -23,7 +23,7 @@ namespace Computation.UI.Forms.Person
         {
             InitializeComponent();
 
-            gridView1.MouseDown += GridView1_MouseDown; ;
+            gridView1.MouseDown += GridView1_MouseDown; 
 
         }
 

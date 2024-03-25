@@ -15,8 +15,16 @@ namespace Computation.UI.Forms.Person
 {
     public partial class PersonAddForm : DevExpress.XtraEditors.XtraForm
     {
+        private PersonView personView;
+
         public PersonAddForm()
         {
+            InitializeComponent();
+        }
+
+        public PersonAddForm(PersonView personView)
+        {
+            this.personView = personView;
             InitializeComponent();
         }
 
@@ -30,28 +38,54 @@ namespace Computation.UI.Forms.Person
                 comboBox1.ValueMember = "Id";
                 comboBox1.DisplayMember = "Name";
             }
+
+            if (personView != null)
+            {
+                comboBox1.SelectedValue = personView.personType.Id;
+                NameText.Text = personView.Name;
+                FamilyText.Text = personView.Family;
+
+                NationalCodeText.Text =personView.NationalCode;
+                 EmailText.Text=personView.Email;
+            }
+
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
 
-          
-                var p = comboBox1.SelectedItem as PersonTypeView;
-            
-          
+            var p = comboBox1.SelectedItem as PersonTypeView;
 
-            var personAdd = new PersonAdd 
-            { 
-                   Name = NameText.Text,
-                   Family = FamilyText.Text,
-                   TypeId = p.Id,
-                   NationalCode = NationalCodeText.Text,
-                   Email = EmailText.Text,
-                   
-            };
-            using (var unit = new UnitOfWork())
+
+            var personAdd = new PersonAdd
             {
-                unit.PersonApp.PersonAdd(personAdd);
+                Name = NameText.Text,
+                Family = FamilyText.Text,
+                TypeId = p.Id,
+                NationalCode = NationalCodeText.Text,
+                Email = EmailText.Text,
+
+            };
+
+            if (personView is null)
+            {
+              
+                using (var unit = new UnitOfWork())
+                {
+                    unit.PersonApp.PersonAdd(personAdd);
+                }
+
+
+            }
+
+            else
+            {
+                personAdd.ID = personView.ID;
+
+                using (var unit = new UnitOfWork())
+                {
+                    unit.PersonApp.PersonEdit(personAdd);
+                }
             }
             this.Close();
         }

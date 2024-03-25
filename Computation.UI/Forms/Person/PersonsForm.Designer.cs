@@ -30,6 +30,12 @@
         {
             gridControl1 = new DevExpress.XtraGrid.GridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            ID = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnName = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnFamily = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnTypeName = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnNationalCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnEmail = new DevExpress.XtraGrid.Columns.GridColumn();
             AddFormShow = new DevExpress.XtraEditors.SimpleButton();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -58,8 +64,79 @@
             // 
             // gridView1
             // 
+            gridView1.Appearance.EvenRow.BackColor = Color.FromArgb(128, 255, 255);
+            gridView1.Appearance.EvenRow.Options.UseBackColor = true;
+            gridView1.Appearance.FocusedRow.FontSizeDelta = 2;
+            gridView1.Appearance.FocusedRow.Options.UseFont = true;
+            gridView1.Appearance.Row.Options.UseTextOptions = true;
+            gridView1.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            gridView1.Appearance.Row.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ID, gridColumnName, gridColumnFamily, gridColumnTypeName, gridColumnNationalCode, gridColumnEmail });
+            gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             gridView1.GridControl = gridControl1;
             gridView1.Name = "gridView1";
+            gridView1.OptionsBehavior.Editable = false;
+            gridView1.OptionsFind.FindMode = DevExpress.XtraEditors.FindMode.FindClick;
+            gridView1.OptionsSelection.MultiSelect = true;
+            gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+            gridView1.OptionsView.AnimationType = DevExpress.XtraGrid.Views.Base.GridAnimationType.AnimateFocusedItem;
+            gridView1.OptionsView.EnableAppearanceEvenRow = true;
+            gridView1.OptionsView.ShowAutoFilterRow = true;
+            // 
+            // ID
+            // 
+            ID.AccessibleName = "";
+            ID.Caption = "کد";
+            ID.FieldName = "ID";
+            ID.Name = "ID";
+            ID.Visible = true;
+            ID.VisibleIndex = 1;
+            ID.Width = 52;
+            // 
+            // gridColumnName
+            // 
+            gridColumnName.Caption = "نام";
+            gridColumnName.FieldName = "Name";
+            gridColumnName.Name = "gridColumnName";
+            gridColumnName.Visible = true;
+            gridColumnName.VisibleIndex = 2;
+            gridColumnName.Width = 122;
+            // 
+            // gridColumnFamily
+            // 
+            gridColumnFamily.Caption = "نام خانوادگی";
+            gridColumnFamily.FieldName = "Family";
+            gridColumnFamily.Name = "gridColumnFamily";
+            gridColumnFamily.Visible = true;
+            gridColumnFamily.VisibleIndex = 3;
+            gridColumnFamily.Width = 125;
+            // 
+            // gridColumnTypeName
+            // 
+            gridColumnTypeName.Caption = "نوع هویت";
+            gridColumnTypeName.FieldName = "PersonTypeName";
+            gridColumnTypeName.Name = "gridColumnTypeName";
+            gridColumnTypeName.Visible = true;
+            gridColumnTypeName.VisibleIndex = 4;
+            gridColumnTypeName.Width = 74;
+            // 
+            // gridColumnNationalCode
+            // 
+            gridColumnNationalCode.Caption = "کد ملی";
+            gridColumnNationalCode.FieldName = "NationalCode";
+            gridColumnNationalCode.Name = "gridColumnNationalCode";
+            gridColumnNationalCode.Visible = true;
+            gridColumnNationalCode.VisibleIndex = 5;
+            gridColumnNationalCode.Width = 149;
+            // 
+            // gridColumnEmail
+            // 
+            gridColumnEmail.Caption = "ایمیل";
+            gridColumnEmail.FieldName = "Email";
+            gridColumnEmail.Name = "gridColumnEmail";
+            gridColumnEmail.Visible = true;
+            gridColumnEmail.VisibleIndex = 6;
+            gridColumnEmail.Width = 163;
             // 
             // AddFormShow
             // 
@@ -157,5 +234,11 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private DevExpress.XtraGrid.Columns.GridColumn ID;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnName;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnFamily;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnTypeName;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnNationalCode;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnEmail;
     }
 }

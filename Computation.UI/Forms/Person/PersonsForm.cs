@@ -1,7 +1,8 @@
 ﻿using Application.Contracts.Person;
-using Application.Contracts.PersonType;
-using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Base;
+
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,38 @@ namespace Computation.UI.Forms.Person
         public PersonsForm()
         {
             InitializeComponent();
+            gridView1.MouseDown += GridView1_MouseDown;
+            
+        }
+
+        
+
+        private void GridView1_MouseDown(object? sender, MouseEventArgs e)
+        {
+            DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+
+            if (e.Button == MouseButtons.Right && view != null)
+            {
+                GridHitInfo hitInfo = view.CalcHitInfo(e.Location);
+
+                if (hitInfo.InRow)
+                {
+                    view.FocusedRowHandle = hitInfo.RowHandle;
+
+                    // Get the data of the focused row
+                    PersonView selectedPerson = view.GetRow(hitInfo.RowHandle) as PersonView;
+
+                    if (selectedPerson != null)
+                    {
+                     
+                        PersonAddForm form = new PersonAddForm(selectedPerson);
+                        form.FormClosed += ChildForm_FormClosed;
+                        form.ShowDialog();
+                    }
+                }
+            }
+
+
         }
 
         private void PersonsForm_Load(object sender, EventArgs e)
@@ -31,7 +64,7 @@ namespace Computation.UI.Forms.Person
                 gridControl1.DataSource = persons;
             }
 
-            gridView1.Columns["ID"].OptionsColumn.AllowFocus = false;
+           // gridView1.Columns["ID"].OptionsColumn.AllowFocus = false;
 
         }
 
@@ -50,5 +83,8 @@ namespace Computation.UI.Forms.Person
 
 
 
+
+
+       
     }
 }

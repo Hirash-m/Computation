@@ -44,5 +44,7 @@ namespace Infrastructure.Repository
         {
            return ctx.Persons.Include(c=>c.Type).ToList();
         }
+
+      
     }
 }

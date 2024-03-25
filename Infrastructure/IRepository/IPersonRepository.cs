@@ -7,5 +7,6 @@ namespace Infrastructure.IRepository
     {
         List<Person> GetPersons();
         bool AddPerson(Person person);
+        
     }
 }
