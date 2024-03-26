@@ -38,7 +38,7 @@ public partial class Person
     public virtual ICollection<User> Users { get; set; } = new List<User>();
 
     public void Edit(int id, string name , string family , string nationalCode,
-        byte typeid , string email
+        byte typeid , string email, ICollection<Phone> phones
         )
     {
         Id = id;
@@ -46,8 +46,9 @@ public partial class Person
         Family = family;
         NationalCode = nationalCode;
         TypeId = typeid;
-        Email = email; 
+        Email = email;
+        Phones = phones;
 
     }
-  
+
 }

@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.Person;
 using Application.Contracts.PersonType;
+using Application.Contracts.PhoneContracts;
 using Infrastructure.IRepository;
 using Infrastructure.Models;
 using System;
@@ -37,11 +38,11 @@ namespace Application
                     Name = person.Name,
                     Family = person.Family,
                     PersonTypeName = person.Type.Name,
-                    NationalCode= person.NationalCode,
-                    Email =person.Email,
-                    personType =person.Type
+                    NationalCode = person.NationalCode,
+                    Email = person.Email,
+                    personType = person.Type,
 
-                   
+
                 };
 
                 personViews.Add(personView);
@@ -49,6 +50,35 @@ namespace Application
 
             return personViews;
         }
+
+        public PersonView GetPerson(int id)
+        {
+            var person = personRepository.GetPerson(id);
+
+            PersonView personView = new PersonView
+            {
+                ID = person.Id,
+                Name = person.Name,
+                Family = person.Family,
+                PersonTypeName = person.Type.Name,
+                NationalCode = person.NationalCode,
+                Email = person.Email,
+                personType = person.Type,
+                Phones = person.Phones.Select(phone => new PhoneView
+                {
+                    
+                    Id = phone.Id,
+                    Phone1 = phone.Phone1,
+                    Type = phone.Type,
+                    IsMain = phone.IsMain
+                }).ToList()
+
+            };
+            return personView;
+        }
+
+
+
 
         public OperationResult PersonAdd(PersonAdd personAdd)
         {
@@ -59,10 +89,19 @@ namespace Application
                 Family = personAdd.Family,
                 TypeId = personAdd.TypeId,
                 NationalCode = personAdd.NationalCode,
-                Email = personAdd.Email
-
+                Email = personAdd.Email,
+                Phones = new List<Phone>()
             };
-
+            foreach (var phoneadd in personAdd.Phones)
+            {
+                var phone = new Phone
+                {
+                    IsMain = phoneadd.IsMain,
+                    Phone1 = phoneadd.Phone1,
+                    Type = phoneadd.Type
+                };
+                newPerson.Phones.Add(phone);
+            };
             var opersation = new OperationResult();
             personRepository.AddPerson(newPerson);
 
@@ -75,9 +114,16 @@ namespace Application
         {
             var operation = new OperationResult();
             var Person = personRepository.Get(personAdd.ID);
+            var phonesList = personAdd.Phones.Select(p => new Infrastructure.Models.Phone
+            {
+                Id = p.Id,
+                IsMain = p.IsMain,
+                Phone1 = p.Phone1,
+                Type = p.Type
+            }).ToList();
 
             Person.Edit(personAdd.ID, personAdd.Name, personAdd.Family,
-                personAdd.NationalCode, personAdd.TypeId, personAdd.Email);
+                personAdd.NationalCode, personAdd.TypeId, personAdd.Email, phonesList);
             personRepository.SaveChanges();
             return operation.Succeeded();
         }

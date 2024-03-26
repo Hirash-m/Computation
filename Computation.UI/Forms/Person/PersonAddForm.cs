@@ -1,6 +1,10 @@
-﻿using Application.Contracts.Person;
+﻿using Application;
+using Application.Contracts.Person;
 using Application.Contracts.PersonType;
+using Application.Contracts.PhoneContracts;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
+using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,9 +34,16 @@ namespace Computation.UI.Forms.Person
 
         private void PersonAddForm_Load(object sender, EventArgs e)
         {
+
+
+
+
             using (var unit = new UnitOfWork())
             {
+
                 var persontypes = new BindingList<PersonTypeView>(unit.PersonTypeApp.GetPersonTypes());
+
+
 
                 comboBox1.DataSource = persontypes;
                 comboBox1.ValueMember = "Id";
@@ -41,12 +52,26 @@ namespace Computation.UI.Forms.Person
 
             if (personView != null)
             {
-                comboBox1.SelectedValue = personView.personType.Id;
-                NameText.Text = personView.Name;
-                FamilyText.Text = personView.Family;
 
-                NationalCodeText.Text =personView.NationalCode;
-                 EmailText.Text=personView.Email;
+
+                using (var unit = new UnitOfWork())
+                {
+                    var personForEdit = unit.PersonApp.GetPerson(personView.ID);
+
+                    comboBox1.SelectedValue = personForEdit.personType.Id;
+                    NameText.Text = personForEdit.Name;
+                    FamilyText.Text = personForEdit.Family;
+                    NationalCodeText.Text = personForEdit.NationalCode;
+                    EmailText.Text = personForEdit.Email;
+
+                    gridControl1.DataSource = new BindingList<PhoneView>(personForEdit.Phones.ToList());
+                }
+            }
+
+            else
+            {
+                var phones = new BindingList<PhoneView>();
+                gridControl1.DataSource = phones;
             }
 
         }
@@ -64,12 +89,20 @@ namespace Computation.UI.Forms.Person
                 TypeId = p.Id,
                 NationalCode = NationalCodeText.Text,
                 Email = EmailText.Text,
-
+                Phones = new List<PhoneView>()
             };
 
+            if (gridControl1.DataSource != null)
+            {
+                var phoneData = gridControl1.DataSource as BindingList<PhoneView>;
+                if (phoneData != null)
+                {
+                    personAdd.Phones = phoneData.ToList();
+                }
+            }
             if (personView is null)
             {
-              
+
                 using (var unit = new UnitOfWork())
                 {
                     unit.PersonApp.PersonAdd(personAdd);
@@ -89,5 +122,7 @@ namespace Computation.UI.Forms.Person
             }
             this.Close();
         }
+
+      
     }
 }

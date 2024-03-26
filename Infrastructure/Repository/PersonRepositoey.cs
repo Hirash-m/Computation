@@ -44,7 +44,11 @@ namespace Infrastructure.Repository
         {
            return ctx.Persons.Include(c=>c.Type).ToList();
         }
-
+        public Person GetPerson(int id)
+        {
+            var a = ctx.Persons.Include(c => c.Type).Include(c => c.Phones).SingleOrDefault(c => c.Id == id);
+            return a;
+        }
       
     }
 }

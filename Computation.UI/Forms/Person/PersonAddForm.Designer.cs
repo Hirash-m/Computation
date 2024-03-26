@@ -32,6 +32,12 @@
             comboBox1 = new ComboBox();
             personTypeAppBindingSource = new BindingSource(components);
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            gridControl1 = new DevExpress.XtraGrid.GridControl();
+            gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridColumnId = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnIsMain = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnType = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnPhone1 = new DevExpress.XtraGrid.Columns.GridColumn();
             EmailText = new DevExpress.XtraEditors.TextEdit();
             NationalCodeText = new DevExpress.XtraEditors.TextEdit();
             simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -46,9 +52,12 @@
             emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)personTypeAppBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)EmailText.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NationalCodeText.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)FamilyText.Properties).BeginInit();
@@ -62,6 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
             SuspendLayout();
             // 
             // comboBox1
@@ -80,6 +90,7 @@
             // 
             // layoutControl1
             // 
+            layoutControl1.Controls.Add(gridControl1);
             layoutControl1.Controls.Add(EmailText);
             layoutControl1.Controls.Add(NationalCodeText);
             layoutControl1.Controls.Add(comboBox1);
@@ -95,6 +106,59 @@
             layoutControl1.Size = new Size(575, 495);
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // gridControl1
+            // 
+            gridControl1.Location = new Point(12, 85);
+            gridControl1.MainView = gridView1;
+            gridControl1.Name = "gridControl1";
+            gridControl1.Size = new Size(551, 352);
+            gridControl1.TabIndex = 7;
+            gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
+            // 
+            // gridView1
+            // 
+            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnId, gridColumnIsMain, gridColumnType, gridColumnPhone1 });
+            gridView1.GridControl = gridControl1;
+            gridView1.Name = "gridView1";
+            gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            gridView1.OptionsCustomization.AllowGroup = false;
+            gridView1.OptionsMenu.EnableGroupPanelMenu = false;
+            gridView1.OptionsView.AllowHtmlDrawGroups = false;
+            gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
+            gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumnId
+            // 
+            gridColumnId.Caption = "gridColumn1";
+            gridColumnId.FieldName = "Id";
+            gridColumnId.Name = "gridColumnId";
+            gridColumnId.Visible = true;
+            gridColumnId.VisibleIndex = 0;
+            // 
+            // gridColumnIsMain
+            // 
+            gridColumnIsMain.Caption = "gridColumn2";
+            gridColumnIsMain.FieldName = "IsMain";
+            gridColumnIsMain.Name = "gridColumnIsMain";
+            gridColumnIsMain.Visible = true;
+            gridColumnIsMain.VisibleIndex = 1;
+            // 
+            // gridColumnType
+            // 
+            gridColumnType.Caption = "gridColumn1";
+            gridColumnType.FieldName = "Type";
+            gridColumnType.Name = "gridColumnType";
+            gridColumnType.Visible = true;
+            gridColumnType.VisibleIndex = 2;
+            // 
+            // gridColumnPhone1
+            // 
+            gridColumnPhone1.Caption = "gridColumn1";
+            gridColumnPhone1.FieldName = "Phone1";
+            gridColumnPhone1.Name = "gridColumnPhone1";
+            gridColumnPhone1.Visible = true;
+            gridColumnPhone1.VisibleIndex = 3;
             // 
             // EmailText
             // 
@@ -143,7 +207,7 @@
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem3, layoutControlItem1, layoutControlItem2, emptySpaceItem2, PersonType, emptySpaceItem3, layoutControlItem4, layoutControlItem5 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem3, layoutControlItem1, layoutControlItem2, emptySpaceItem2, PersonType, emptySpaceItem3, layoutControlItem4, layoutControlItem5, layoutControlItem6 });
             Root.Name = "Root";
             Root.Size = new Size(575, 495);
             Root.TextVisible = false;
@@ -199,9 +263,9 @@
             // emptySpaceItem3
             // 
             emptySpaceItem3.AllowHotTrack = false;
-            emptySpaceItem3.Location = new Point(0, 73);
+            emptySpaceItem3.Location = new Point(0, 429);
             emptySpaceItem3.Name = "emptySpaceItem3";
-            emptySpaceItem3.Size = new Size(555, 366);
+            emptySpaceItem3.Size = new Size(555, 10);
             emptySpaceItem3.TextSize = new Size(0, 0);
             // 
             // layoutControlItem4
@@ -222,6 +286,15 @@
             layoutControlItem5.Text = "ایمیل :";
             layoutControlItem5.TextSize = new Size(65, 13);
             // 
+            // layoutControlItem6
+            // 
+            layoutControlItem6.Control = gridControl1;
+            layoutControlItem6.Location = new Point(0, 73);
+            layoutControlItem6.Name = "layoutControlItem6";
+            layoutControlItem6.Size = new Size(555, 356);
+            layoutControlItem6.TextSize = new Size(0, 0);
+            layoutControlItem6.TextVisible = false;
+            // 
             // PersonAddForm
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
@@ -234,6 +307,8 @@
             ((System.ComponentModel.ISupportInitialize)personTypeAppBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)EmailText.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)NationalCodeText.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)FamilyText.Properties).EndInit();
@@ -247,6 +322,7 @@
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
             ResumeLayout(false);
         }
 
@@ -271,5 +347,12 @@
         private DevExpress.XtraEditors.TextEdit EmailText;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private BindingSource personTypeAppBindingSource;
+        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnId;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsMain;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnType;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnPhone1;
     }
 }
