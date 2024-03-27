@@ -26,6 +26,6 @@ namespace Application.Contracts.PhoneContracts
 
         public short Type { get; set; }
 
-        public string? Phone1 { get; set; } = null;
+        public string Phone1 { get; set; } = null;
     }
 }

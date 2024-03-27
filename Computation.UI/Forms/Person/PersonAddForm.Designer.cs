@@ -1,4 +1,9 @@
-﻿namespace Computation.UI.Forms.Person
+﻿using DevExpress.Pdf.Native.BouncyCastle.Asn1.X509;
+using DevExpress.XtraEditors.Mask;
+using DevExpress.XtraEditors.Mask.Design;
+using DevExpress.XtraEditors.Repository;
+
+namespace Computation.UI.Forms.Person
 {
     partial class PersonAddForm
     {
@@ -29,6 +34,14 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleIconSet formatConditionRuleIconSet1 = new DevExpress.XtraEditors.FormatConditionRuleIconSet();
+            DevExpress.XtraEditors.FormatConditionIconSet formatConditionIconSet1 = new DevExpress.XtraEditors.FormatConditionIconSet();
+            DevExpress.XtraEditors.FormatConditionIconSetIcon formatConditionIconSetIcon1 = new DevExpress.XtraEditors.FormatConditionIconSetIcon();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PersonAddForm));
+            DevExpress.XtraEditors.FormatConditionIconSetIcon formatConditionIconSetIcon2 = new DevExpress.XtraEditors.FormatConditionIconSetIcon();
+            gridColumnType = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemTextEdit2 = new RepositoryItemTextEdit();
             comboBox1 = new ComboBox();
             personTypeAppBindingSource = new BindingSource(components);
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
@@ -36,8 +49,8 @@
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnId = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnIsMain = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnType = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPhone1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemTextEdit1 = new RepositoryItemTextEdit();
             EmailText = new DevExpress.XtraEditors.TextEdit();
             NationalCodeText = new DevExpress.XtraEditors.TextEdit();
             simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -53,11 +66,13 @@
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)personTypeAppBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)EmailText.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NationalCodeText.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)FamilyText.Properties).BeginInit();
@@ -73,6 +88,26 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
             SuspendLayout();
+            // 
+            // gridColumnType
+            // 
+            gridColumnType.AccessibleName = "";
+            gridColumnType.Caption = "نوع";
+            gridColumnType.ColumnEdit = repositoryItemTextEdit2;
+            gridColumnType.FieldName = "Type";
+            gridColumnType.Name = "gridColumnType";
+            gridColumnType.OptionsEditForm.Caption = "نوع شماره تماس";
+            gridColumnType.Visible = true;
+            gridColumnType.VisibleIndex = 1;
+            gridColumnType.Width = 59;
+            // 
+            // repositoryItemTextEdit2
+            // 
+            repositoryItemTextEdit2.AutoHeight = false;
+            repositoryItemTextEdit2.MaskSettings.Set("mask", "[01]+");
+            repositoryItemTextEdit2.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegExpMaskManager));
+            repositoryItemTextEdit2.MaxLength = 1;
+            repositoryItemTextEdit2.Name = "repositoryItemTextEdit2";
             // 
             // comboBox1
             // 
@@ -112,53 +147,88 @@
             gridControl1.Location = new Point(12, 85);
             gridControl1.MainView = gridView1;
             gridControl1.Name = "gridControl1";
+            gridControl1.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemTextEdit1, repositoryItemTextEdit2 });
             gridControl1.Size = new Size(551, 352);
             gridControl1.TabIndex = 7;
             gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
             // gridView1
             // 
+            gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            gridView1.Appearance.Row.Options.UseTextOptions = true;
+            gridView1.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnId, gridColumnIsMain, gridColumnType, gridColumnPhone1 });
+            gridFormatRule1.Column = gridColumnType;
+            gridFormatRule1.ColumnApplyTo = gridColumnType;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleIconSet1.AllowAnimation = DevExpress.Utils.DefaultBoolean.True;
+            formatConditionIconSet1.CategoryName = "Symbols";
+            formatConditionIconSetIcon1.Icon = (Image)resources.GetObject("formatConditionIconSetIcon1.Icon");
+            formatConditionIconSetIcon1.ValueComparison = DevExpress.XtraEditors.FormatConditionComparisonType.GreaterOrEqual;
+            formatConditionIconSetIcon2.Icon = (Image)resources.GetObject("formatConditionIconSetIcon2.Icon");
+            formatConditionIconSetIcon2.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            formatConditionIconSetIcon2.ValueComparison = DevExpress.XtraEditors.FormatConditionComparisonType.GreaterOrEqual;
+            formatConditionIconSet1.Icons.Add(formatConditionIconSetIcon1);
+            formatConditionIconSet1.Icons.Add(formatConditionIconSetIcon2);
+            formatConditionIconSet1.Name = "Flags3";
+            formatConditionIconSet1.ValueType = DevExpress.XtraEditors.FormatConditionValueType.Number;
+            formatConditionRuleIconSet1.IconSet = formatConditionIconSet1;
+            gridFormatRule1.Rule = formatConditionRuleIconSet1;
+            gridView1.FormatRules.Add(gridFormatRule1);
             gridView1.GridControl = gridControl1;
             gridView1.Name = "gridView1";
             gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            gridView1.OptionsBehavior.AllowValidationErrors = false;
             gridView1.OptionsCustomization.AllowGroup = false;
             gridView1.OptionsMenu.EnableGroupPanelMenu = false;
             gridView1.OptionsView.AllowHtmlDrawGroups = false;
             gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
             gridView1.OptionsView.ShowGroupPanel = false;
+            gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridColumnIsMain, DevExpress.Data.ColumnSortOrder.Descending) });
             // 
             // gridColumnId
             // 
             gridColumnId.Caption = "gridColumn1";
             gridColumnId.FieldName = "Id";
             gridColumnId.Name = "gridColumnId";
-            gridColumnId.Visible = true;
-            gridColumnId.VisibleIndex = 0;
             // 
             // gridColumnIsMain
             // 
-            gridColumnIsMain.Caption = "gridColumn2";
+            gridColumnIsMain.AccessibleName = "";
+            gridColumnIsMain.Caption = "اصلی";
             gridColumnIsMain.FieldName = "IsMain";
             gridColumnIsMain.Name = "gridColumnIsMain";
             gridColumnIsMain.Visible = true;
-            gridColumnIsMain.VisibleIndex = 1;
-            // 
-            // gridColumnType
-            // 
-            gridColumnType.Caption = "gridColumn1";
-            gridColumnType.FieldName = "Type";
-            gridColumnType.Name = "gridColumnType";
-            gridColumnType.Visible = true;
-            gridColumnType.VisibleIndex = 2;
+            gridColumnIsMain.VisibleIndex = 0;
+            gridColumnIsMain.Width = 58;
             // 
             // gridColumnPhone1
             // 
-            gridColumnPhone1.Caption = "gridColumn1";
+            gridColumnPhone1.AccessibleName = "";
+            gridColumnPhone1.Caption = "شماره";
+            gridColumnPhone1.ColumnEdit = repositoryItemTextEdit1;
             gridColumnPhone1.FieldName = "Phone1";
             gridColumnPhone1.Name = "gridColumnPhone1";
+            gridColumnPhone1.OptionsEditForm.StartNewRow = true;
             gridColumnPhone1.Visible = true;
-            gridColumnPhone1.VisibleIndex = 3;
+            gridColumnPhone1.VisibleIndex = 2;
+            gridColumnPhone1.Width = 568;
+            // 
+            // repositoryItemTextEdit1
+            // 
+            repositoryItemTextEdit1.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            repositoryItemTextEdit1.AutoHeight = false;
+            repositoryItemTextEdit1.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegExpMaskManager));
+            repositoryItemTextEdit1.MaskSettings.Set("MaskManagerSignature", "isOptimistic=False");
+            repositoryItemTextEdit1.MaskSettings.Set("mask", "\\d+");
+            repositoryItemTextEdit1.MaskSettings.Set("placeholder", '\0');
+            repositoryItemTextEdit1.MaskSettings.Set("showPlaceholders", false);
+            repositoryItemTextEdit1.MaskSettings.Set("allowBlankInput", false);
+            repositoryItemTextEdit1.MaxLength = 11;
+            repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
+            repositoryItemTextEdit1.NullText = "---";
+            repositoryItemTextEdit1.UseMaskAsDisplayFormat = true;
             // 
             // EmailText
             // 
@@ -304,11 +374,13 @@
             Name = "PersonAddForm";
             Text = "PersonAddForm";
             Load += PersonAddForm_Load;
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit2).EndInit();
             ((System.ComponentModel.ISupportInitialize)personTypeAppBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)EmailText.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)NationalCodeText.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)FamilyText.Properties).EndInit();
@@ -354,5 +426,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsMain;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnType;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPhone1;
+        private RepositoryItemTextEdit repositoryItemTextEdit1;
+        private RepositoryItemTextEdit repositoryItemTextEdit2;
     }
 }
