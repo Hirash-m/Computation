@@ -56,7 +56,26 @@ namespace Computation.UI
         }
 
 
-  
+        private IPhoneApp _phoneApp;
+        private IPhoneRepository _phoneRepository;
+
+        public IPhoneApp PhoneApp
+        {
+            get
+            {
+                if (_phoneRepository == null)
+                {
+                    _phoneRepository = new PhoneRepositpry(db);
+                }
+
+                if (_phoneApp == null)
+                {
+                    _phoneApp = new PhoneApp(_phoneRepository);
+                }
+
+                return _phoneApp;
+            }
+        }
 
         public void Save()
         {

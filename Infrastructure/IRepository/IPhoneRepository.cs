@@ -9,6 +9,6 @@ namespace Infrastructure.IRepository
 {
     public interface IPhoneRepository : IRepository<Phone , int>
     {
-        bool PhoneAdd(Phone phone);
+        bool DeleteAdd(int phoneId);
     }
 }

@@ -10,6 +10,7 @@ namespace Application.Contracts.Person
         OperationResult PersonAdd(PersonAdd personAdd);
         OperationResult PersonEdit(PersonAdd personAdd);
         PersonView GetPerson(int id);
+        OperationResult PersonDelete(int id);
 
     }
 }

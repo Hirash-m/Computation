@@ -1,4 +1,5 @@
 ﻿using Application.Contracts.PhoneContracts;
+using Infrastructure.IRepository;
 using Infrastructure.Models;
 using Utility.App;
 
@@ -7,6 +8,12 @@ namespace Application
 {
     public class PhoneApp : IPhoneApp
     {
+        private readonly IPhoneRepository _phoneRepository;
+
+        public PhoneApp(IPhoneRepository phoneRepository)
+        {
+            this._phoneRepository = phoneRepository;
+        }
         public OperationResult AddPhone(Phone command, int personId)
         {
             throw new NotImplementedException();
@@ -14,7 +21,9 @@ namespace Application
 
         public OperationResult DeletePhone(int id)
         {
-            throw new NotImplementedException();
+            var operation = new OperationResult();
+           _phoneRepository.DeleteById(id);
+           return operation.Succeeded();
         }
 
         public OperationResult EditPhone(PhoneView command)

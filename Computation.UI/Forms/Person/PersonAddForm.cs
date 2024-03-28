@@ -19,48 +19,47 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraGrid.Views.Grid;
 
-
+// فضای‌نام‌ها
 namespace Computation.UI.Forms.Person
 {
     public partial class PersonAddForm : DevExpress.XtraEditors.XtraForm
     {
         private PersonView personView;
 
+        // سازنده بدون پارامتر
         public PersonAddForm()
         {
             InitializeComponent();
-          
         }
 
+        // سازنده با پارامتر
         public PersonAddForm(PersonView personView)
         {
             this.personView = personView;
-          
             InitializeComponent();
         }
-        
+
+        // رویداد Load فرم
         private void PersonAddForm_Load(object sender, EventArgs e)
         {
-
+            // اتصال رویدادها
             gridView1.PopupMenuShowing += GridView_PopupMenuShowing;
             gridView1.CellValueChanging += gridView1_CellValueChanged;
 
+            // دریافت انواع شخص از دیتابیس
             using (var unit = new UnitOfWork())
             {
-
                 var persontypes = new BindingList<PersonTypeView>(unit.PersonTypeApp.GetPersonTypes());
-
-
 
                 comboBox1.DataSource = persontypes;
                 comboBox1.ValueMember = "Id";
                 comboBox1.DisplayMember = "Name";
             }
 
+            // اگر شخص مورد نظر برای ویرایش وجود داشت
             if (personView != null)
             {
-
-
+                // دریافت اطلاعات شخص از دیتابیس
                 using (var unit = new UnitOfWork())
                 {
                     var personForEdit = unit.PersonApp.GetPerson(personView.ID);
@@ -74,20 +73,17 @@ namespace Computation.UI.Forms.Person
                     gridControl1.DataSource = new BindingList<PhoneView>(personForEdit.Phones.ToList());
                 }
             }
-
             else
             {
                 var phones = new BindingList<PhoneView>();
                 gridControl1.DataSource = phones;
             }
-
         }
 
+        // رویداد کلیک بر روی دکمه ذخیره
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-
             var p = comboBox1.SelectedItem as PersonTypeView;
-
 
             var personAdd = new PersonAdd
             {
@@ -107,21 +103,19 @@ namespace Computation.UI.Forms.Person
                     personAdd.Phones = phoneData.ToList();
                 }
             }
+
             if (personView is null)
             {
-
+                // افزودن شخص جدید
                 using (var unit = new UnitOfWork())
                 {
                     unit.PersonApp.PersonAdd(personAdd);
                 }
-
-
             }
-
             else
             {
+                // ویرایش شخص موجود
                 personAdd.ID = personView.ID;
-
                 using (var unit = new UnitOfWork())
                 {
                     unit.PersonApp.PersonEdit(personAdd);
@@ -130,6 +124,7 @@ namespace Computation.UI.Forms.Person
             this.Close();
         }
 
+        // رویداد تغییر مقدار در سلول‌های جدول
         private void gridView1_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
             if (e != null && e.Column != null && e.Column.FieldName == "IsMain" && e.Value != null && (bool)e.Value == true)
@@ -152,6 +147,7 @@ namespace Computation.UI.Forms.Person
             }
         }
 
+        // رویداد نمایش منوی روی گرید
         private void GridView_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
             if (e.MenuType == GridMenuType.Row)
@@ -160,17 +156,24 @@ namespace Computation.UI.Forms.Person
             }
         }
 
-        // رویداد برای حذف رکورد
+        // رویداد حذف رکورد
         private void OnDeleteRow(object sender, EventArgs e)
         {
             if (gridView1.FocusedRowHandle >= 0)
             {
                 if (MessageBox.Show("آیا مطمئن هستید که می‌خواهید این رکورد را حذف کنید؟", "تایید حذف", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    gridView1.DeleteRow(gridView1.FocusedRowHandle);
+                    using (var unit = new UnitOfWork())
+                    {
+                        var id = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Id");
+                        unit.PhoneApp.DeletePhone(Convert.ToInt32(id));
+
+                        gridView1.DeleteRow(gridView1.FocusedRowHandle);
+                        unit.Save();
+                    }
                 }
             }
         }
-
     }
 }
+

@@ -41,7 +41,9 @@
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
@@ -49,7 +51,8 @@
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             SuspendLayout();
             // 
             // gridControl1
@@ -59,7 +62,7 @@
             gridControl1.Name = "gridControl1";
             gridControl1.RightToLeft = RightToLeft.Yes;
             gridControl1.Size = new Size(946, 568);
-            gridControl1.TabIndex = 2;
+            gridControl1.TabIndex = 3;
             gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
             // gridView1
@@ -150,6 +153,7 @@
             // 
             // layoutControl1
             // 
+            layoutControl1.Controls.Add(simpleButton1);
             layoutControl1.Controls.Add(gridControl1);
             layoutControl1.Controls.Add(AddFormShow);
             layoutControl1.Dock = DockStyle.Fill;
@@ -165,7 +169,7 @@
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, emptySpaceItem2 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, emptySpaceItem1 });
             Root.Name = "Root";
             Root.Size = new Size(970, 618);
             Root.TextVisible = false;
@@ -191,13 +195,32 @@
             layoutControlItem2.TextSize = new Size(0, 0);
             layoutControlItem2.TextVisible = false;
             // 
-            // emptySpaceItem2
+            // simpleButton1
             // 
-            emptySpaceItem2.AllowHotTrack = false;
-            emptySpaceItem2.Location = new Point(66, 0);
-            emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new Size(884, 26);
-            emptySpaceItem2.TextSize = new Size(0, 0);
+            simpleButton1.Location = new Point(78, 12);
+            simpleButton1.Name = "simpleButton1";
+            simpleButton1.Size = new Size(74, 22);
+            simpleButton1.StyleController = layoutControl1;
+            simpleButton1.TabIndex = 2;
+            simpleButton1.Text = "simpleButton1";
+            simpleButton1.Click += simpleButton1_Click;
+            // 
+            // layoutControlItem3
+            // 
+            layoutControlItem3.Control = simpleButton1;
+            layoutControlItem3.Location = new Point(66, 0);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new Size(78, 26);
+            layoutControlItem3.TextSize = new Size(0, 0);
+            layoutControlItem3.TextVisible = false;
+            // 
+            // emptySpaceItem1
+            // 
+            emptySpaceItem1.AllowHotTrack = false;
+            emptySpaceItem1.Location = new Point(144, 0);
+            emptySpaceItem1.Name = "emptySpaceItem1";
+            emptySpaceItem1.Size = new Size(806, 26);
+            emptySpaceItem1.TextSize = new Size(0, 0);
             // 
             // PersonsForm
             // 
@@ -220,7 +243,8 @@
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ResumeLayout(false);
         }
 
@@ -233,12 +257,14 @@
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraGrid.Columns.GridColumn ID;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnFamily;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnTypeName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnNationalCode;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnEmail;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
     }
 }

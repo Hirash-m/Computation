@@ -127,5 +127,12 @@ namespace Application
             personRepository.SaveChanges();
             return operation.Succeeded();
         }
+
+        public OperationResult PersonDelete(int id)
+        {
+            var operation = new OperationResult();
+            personRepository.DeleteById(id);
+                return operation.Succeeded();
+        }
     }
 }

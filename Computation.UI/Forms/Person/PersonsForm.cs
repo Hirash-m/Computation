@@ -20,19 +20,19 @@ namespace Computation.UI.Forms.Person
         public PersonsForm()
         {
             InitializeComponent();
-            gridView1.MouseDown += GridView1_MouseDown;
-            
+            gridView1.DoubleClick += GridView1_DoubleClick;
+
         }
 
-        
 
-        private void GridView1_MouseDown(object? sender, MouseEventArgs e)
+
+        private void GridView1_DoubleClick(object sender, EventArgs e)
         {
             DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
 
-            if (e.Button == MouseButtons.Right && view != null)
+            if (view != null)
             {
-                GridHitInfo hitInfo = view.CalcHitInfo(e.Location);
+                GridHitInfo hitInfo = view.CalcHitInfo(view.GridControl.PointToClient(Control.MousePosition));
 
                 if (hitInfo.InRow)
                 {
@@ -43,16 +43,14 @@ namespace Computation.UI.Forms.Person
 
                     if (selectedPerson != null)
                     {
-                     
                         PersonAddForm form = new PersonAddForm(selectedPerson);
                         form.FormClosed += ChildForm_FormClosed;
                         form.ShowDialog();
                     }
                 }
             }
-
-
         }
+
 
         private void PersonsForm_Load(object sender, EventArgs e)
         {
@@ -64,7 +62,7 @@ namespace Computation.UI.Forms.Person
                 gridControl1.DataSource = persons;
             }
 
-           // gridView1.Columns["ID"].OptionsColumn.AllowFocus = false;
+            // gridView1.Columns["ID"].OptionsColumn.AllowFocus = false;
 
         }
 
@@ -84,7 +82,39 @@ namespace Computation.UI.Forms.Person
 
 
 
+        private void DeleteSelectedRecords()
+        {
+            // Get the selected rows in the grid
+            int[] selectedRows = gridView1.GetSelectedRows();
 
-       
+            if (selectedRows.Length > 0)
+            {
+                if (MessageBox.Show("Are you sure you want to delete the selected records?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    // Create a list to store the selected PersonView objects
+                    List<PersonView> selectedPersons = new List<PersonView>();
+                    using (var unit = new UnitOfWork()) { 
+                        foreach (int rowHandle in selectedRows)
+                        {
+                            PersonView selectedPerson = gridView1.GetRow(rowHandle) as PersonView;
+
+                            if (selectedPerson != null)
+                            {
+                                var id = selectedPerson.ID; // Retrieve the id value
+                                unit.PersonApp.PersonDelete(id);
+                                unit.Save();
+                               
+                            }
+                        }
+                    }
+                  
+                }
+            }
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            DeleteSelectedRecords();
+        }
     }
 }
