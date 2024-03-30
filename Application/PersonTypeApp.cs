@@ -21,7 +21,7 @@ namespace Application
 
             if (existingPersonType != null)
             {
-               return operation.Failed("نوع تکراری میباشد .");
+               return operation.Failed(".نوع تکراری میباشد ");
             }
 
             personTypeRepository.Add(command);
@@ -34,10 +34,10 @@ namespace Application
         public OperationResult DeletePersonType(byte id)
         {
             var operation = new OperationResult();
-            var status = personTypeRepository.ExistById(id);
-            if (status)
+            var personType = personTypeRepository.Get(id);
+            if (personType != null)
             {
-                personTypeRepository.DeleteById(id);
+                personTypeRepository.Delete(personType);
                 return operation.Succeeded();
             }
             else
@@ -54,7 +54,7 @@ namespace Application
             var existingPersonType = personTypeRepository.GetPersonTypes().FirstOrDefault(p => p.Name == command.Name);
             if (existingPersonType != null)
             {
-                return operation.Failed("نوع تکراری میباشد .");
+                return operation.Failed(". نوع تکراری میباشد ");
             }
             else
             {

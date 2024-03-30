@@ -1,4 +1,5 @@
-﻿using Application.Contracts.PhoneContracts;
+﻿using Application.Contracts.AddressContracts;
+using Application.Contracts.PhoneContracts;
 using Infrastructure.Models;
 using System;
 using System.Collections;
@@ -31,6 +32,8 @@ namespace Application.Contracts.Person
         public Infrastructure.Models.PersonType personType {  get; set; } 
 
         public ICollection<PhoneView> Phones { get; set; }
+
+        public ICollection<AddressView> Addresses { get; set; }
 
     }
 

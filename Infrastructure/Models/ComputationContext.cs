@@ -57,7 +57,6 @@ public partial class ComputationContext : DbContext
 
             entity.HasOne(d => d.Person).WithMany(p => p.Addresses)
                 .HasForeignKey(d => d.PersonId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Addresses_Persons");
         });
 
@@ -143,6 +142,7 @@ public partial class ComputationContext : DbContext
 
             entity.HasOne(d => d.Type).WithMany(p => p.People)
                 .HasForeignKey(d => d.TypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Persons_PersonType");
         });
 
@@ -167,7 +167,6 @@ public partial class ComputationContext : DbContext
 
             entity.HasOne(d => d.Person).WithMany(p => p.Phones)
                 .HasForeignKey(d => d.PersonId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Phones_Persons");
         });
 

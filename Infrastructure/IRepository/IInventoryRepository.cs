@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.IRepository
 {
-    public interface IPhoneRepository : IRepository<Phone , int>
+    public interface IInventoryRepository : IRepository<Inventory, short>
     {
-        
+   
     }
 }

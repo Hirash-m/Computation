@@ -1,4 +1,6 @@
 ﻿using Application;
+using Application.Contracts.AddressContracts;
+using Application.Contracts.Inventory;
 using Application.Contracts.Person;
 using Application.Contracts.PersonType;
 using Application.Contracts.PhoneContracts;
@@ -74,6 +76,48 @@ namespace Computation.UI
                 }
 
                 return _phoneApp;
+            }
+        }
+
+        private IAddressApp _addressApp;
+        private IAddressRepository _addressRepository;
+
+        public IAddressApp AddressApp
+        {
+            get
+            {
+                if (_addressRepository == null)
+                {
+                    _addressRepository = new AddressRepositpry(db);
+                }
+
+                if (_addressApp == null)
+                {
+                    _addressApp = new AddressApp(_addressRepository);
+                }
+
+                return _addressApp;
+            }
+        }
+
+        private IInventoryApp _inventoryApp;
+        private IInventoryRepository _inventoryRepository;
+
+        public IInventoryApp InventoryApp
+        {
+            get
+            {
+                if (_inventoryRepository == null)
+                {
+                    _inventoryRepository = new InventoryRepository(db);
+                }
+
+                if (_inventoryApp == null)
+                {
+                    _inventoryApp = new InventoryApp(_inventoryRepository);
+                }
+
+                return _inventoryApp;
             }
         }
 

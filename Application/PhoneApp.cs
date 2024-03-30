@@ -19,10 +19,13 @@ namespace Application
             throw new NotImplementedException();
         }
 
+        
+
         public OperationResult DeletePhone(int id)
         {
             var operation = new OperationResult();
-           _phoneRepository.DeleteById(id);
+            var phone = _phoneRepository.Get(id);
+            if (phone != null)  _phoneRepository.Delete(phone);
            return operation.Succeeded();
         }
 

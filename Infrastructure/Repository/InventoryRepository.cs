@@ -8,17 +8,13 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
-    public class PhoneRepositpry : BaseRepository<Phone, int>, IPhoneRepository
+    public class InventoryRepository : BaseRepository<Inventory ,short> , IInventoryRepository
     {
-
         private readonly ComputationContext ctx;
 
-
-        public PhoneRepositpry(ComputationContext context) : base(context)
+        public InventoryRepository(ComputationContext ctx) : base(ctx)
         {
-            this.ctx = context;
+            this.ctx = ctx;
         }
-
-     
     }
 }

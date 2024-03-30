@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.IRepository
 {
-    public interface IPhoneRepository : IRepository<Phone , int>
+    public interface IAddressRepository : IRepository<Address,int>
     {
         
     }

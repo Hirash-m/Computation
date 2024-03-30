@@ -28,12 +28,7 @@ namespace Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public void DeleteById(TKey id)
-        {
-            var entity = Get(id);
-
-            Delete(entity);
-        }
+     
 
         public bool Exist(Expression<Func<T, bool>> expression)
         {

@@ -9,7 +9,7 @@ public partial class Address
 
     public int PersonId { get; set; }
 
-    public int RegionId { get; set; }
+    public int? RegionId { get; set; }
 
     public bool IsMain { get; set; }
 

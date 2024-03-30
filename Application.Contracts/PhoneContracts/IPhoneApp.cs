@@ -14,6 +14,7 @@ namespace Application.Contracts.PhoneContracts
         OperationResult AddPhone(Infrastructure.Models.Phone command,int personId);
 
         OperationResult DeletePhone(int id);
+        
         OperationResult EditPhone(PhoneView command);
     }
 
