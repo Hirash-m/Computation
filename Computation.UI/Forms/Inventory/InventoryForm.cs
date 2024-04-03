@@ -1,14 +1,4 @@
 ﻿using Application.Contracts.PersonType;
-using DevExpress.CodeParser;
-using DevExpress.XtraCharts;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Grid;
-using Infrastructure.Models;
-using System.Data;
-using System.Windows.Controls;
-using DevExpress.XtraEditors;
-using DevExpress.Mvvm.Native;
-using DevExpress.Utils.Extensions;
 using System.ComponentModel;
 using System.Windows.Forms;
 using DevExpress.XtraExport.Helpers;
@@ -81,20 +71,22 @@ public partial class InventoryForm : DevExpress.XtraEditors.XtraForm
             var InventoryData = gridControl.DataSource as BindingList<InventoryView>;
             if (InventoryData != null)
             {
-                var inventoryForEdit = new List<InventoryView>();
+                
                 foreach (var item in InventoryData)
                 {
-                    if (item.Id == 0)
+                    using (var unit = new UnitOfWork())
                     {
-                        using (var unit = new UnitOfWork())
-                        {
+                        if (item.Id == 0)
+                    {
+                       
                             unit.InventoryApp.InventoryAdd(item);
                             unit.Save();
-                        }
+                       
                     }
                     if (item.Id != 0)
                     {
-                        inventoryForEdit.Add(item);
+                            unit.InventoryApp.InventoryEdit(item);
+                    }
                     }
                 }
                 InventoryForm_Load(sender, e);
@@ -109,7 +101,7 @@ public partial class InventoryForm : DevExpress.XtraEditors.XtraForm
         {
 
 
-            byte selectedRowId = (byte)gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Id");
+            short selectedRowId = (short)gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Id");
 
             var mBox = MessageBox.Show($"از حذف رکورد با کد {selectedRowId} مطمئن هستید ؟", "اخطار", MessageBoxButtons.YesNo);
 
@@ -117,7 +109,7 @@ public partial class InventoryForm : DevExpress.XtraEditors.XtraForm
             {
                 using (var unit = new UnitOfWork())
                 {
-                    unit.PersonTypeApp.DeletePersonType(selectedRowId);
+                    unit.InventoryApp.InventoryDelete(selectedRowId);
                     unit.Save();
                 }
                 InventoryForm_Load(sender, e);

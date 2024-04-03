@@ -27,6 +27,6 @@ namespace Application.Contracts.Inventory
         List<InventoryView> GetInventory();
         OperationResult InventoryAdd(InventoryView command);
         OperationResult InventoryEdit(InventoryView command);
-        OperationResult InventoryDelete(int id);
+        OperationResult InventoryDelete(short id);
     }
 }

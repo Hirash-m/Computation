@@ -67,14 +67,24 @@ namespace Application
             return operation.Succeeded();
         }
 
-        public OperationResult InventoryDelete(int id)
+        public OperationResult InventoryDelete(short id)
         {
-            throw new NotImplementedException();
+            var operation = new OperationResult();
+            var inventory = _inventoryRepository.Get(id);
+            _inventoryRepository.Delete(inventory);
+            return operation.Succeeded();
         }
 
         public OperationResult InventoryEdit(InventoryView command)
         {
-            throw new NotImplementedException();
+            var operation = new OperationResult();
+            var inventory = _inventoryRepository.Get(command.Id);
+
+            inventory.Edit(command.Name ,command.IsActive);
+            _inventoryRepository.SaveChanges();
+
+
+            return operation.Succeeded();
         }
     }
 }
