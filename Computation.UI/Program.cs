@@ -1,7 +1,9 @@
 ﻿
 
+using Computation.UI.Forms;
 using Computation.UI.Forms.Inventory;
 using Computation.UI.Forms.Person;
+using Computation.UI.MainData.Person;
 
 namespace Computation.UI
 {
@@ -13,7 +15,7 @@ namespace Computation.UI
            
 
             ApplicationConfiguration.Initialize();
-            System.Windows.Forms.Application.Run(new InventoryForm());
+            System.Windows.Forms.Application.Run(new ToolbarForm1());
             
         }
     }
