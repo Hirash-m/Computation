@@ -83,6 +83,9 @@ namespace Computation.UI.Forms.Person
             {
                 var phones = new BindingList<PhoneView>();
                 gridControl1.DataSource = phones;
+
+                var address = new BindingList<AddressView>();
+                gridControl2.DataSource = address;
             }
         }
 

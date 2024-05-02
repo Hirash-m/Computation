@@ -38,10 +38,10 @@
             gridColumnEmail = new DevExpress.XtraGrid.Columns.GridColumn();
             AddFormShow = new DevExpress.XtraEditors.SimpleButton();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
@@ -74,6 +74,8 @@
             gridView1.Appearance.Row.Options.UseTextOptions = true;
             gridView1.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             gridView1.Appearance.Row.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            gridView1.Appearance.SelectedRow.BackColor = Color.Silver;
+            gridView1.Appearance.SelectedRow.Options.UseBackColor = true;
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ID, gridColumnName, gridColumnFamily, gridColumnTypeName, gridColumnNationalCode, gridColumnEmail });
             gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             gridView1.GridControl = gridControl1;
@@ -143,6 +145,8 @@
             // 
             // AddFormShow
             // 
+            AddFormShow.Appearance.BackColor = Color.FromArgb(0, 192, 0);
+            AddFormShow.Appearance.Options.UseBackColor = true;
             AddFormShow.Location = new Point(12, 12);
             AddFormShow.Name = "AddFormShow";
             AddFormShow.Size = new Size(62, 22);
@@ -164,6 +168,20 @@
             layoutControl1.Size = new Size(970, 618);
             layoutControl1.TabIndex = 2;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // simpleButton1
+            // 
+            simpleButton1.Appearance.BackColor = Color.Red;
+            simpleButton1.Appearance.ForeColor = Color.Black;
+            simpleButton1.Appearance.Options.UseBackColor = true;
+            simpleButton1.Appearance.Options.UseForeColor = true;
+            simpleButton1.Location = new Point(78, 12);
+            simpleButton1.Name = "simpleButton1";
+            simpleButton1.Size = new Size(74, 22);
+            simpleButton1.StyleController = layoutControl1;
+            simpleButton1.TabIndex = 2;
+            simpleButton1.Text = "حذف";
+            simpleButton1.Click += simpleButton1_Click;
             // 
             // Root
             // 
@@ -194,16 +212,6 @@
             layoutControlItem2.Size = new Size(950, 572);
             layoutControlItem2.TextSize = new Size(0, 0);
             layoutControlItem2.TextVisible = false;
-            // 
-            // simpleButton1
-            // 
-            simpleButton1.Location = new Point(78, 12);
-            simpleButton1.Name = "simpleButton1";
-            simpleButton1.Size = new Size(74, 22);
-            simpleButton1.StyleController = layoutControl1;
-            simpleButton1.TabIndex = 2;
-            simpleButton1.Text = "simpleButton1";
-            simpleButton1.Click += simpleButton1_Click;
             // 
             // layoutControlItem3
             // 

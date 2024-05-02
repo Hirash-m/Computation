@@ -31,17 +31,17 @@
             components = new System.ComponentModel.Container();
             barManager1 = new DevExpress.XtraBars.BarManager(components);
             bar2 = new DevExpress.XtraBars.Bar();
-            barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            barDockingMenuItem1 = new DevExpress.XtraBars.BarDockingMenuItem();
+            BaseMenueBtn = new DevExpress.XtraBars.BarSubItem();
+            PersonBaseBtn = new DevExpress.XtraBars.BarButtonItem();
             bar3 = new DevExpress.XtraBars.Bar();
             barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            barDockingMenuItem1 = new DevExpress.XtraBars.BarDockingMenuItem();
             documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(components);
             tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(components);
-            BaseMenueBtn = new DevExpress.XtraBars.BarSubItem();
-            PersonBaseBtn = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)documentManager1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tabbedView1).BeginInit();
@@ -66,23 +66,27 @@
             bar2.DockCol = 0;
             bar2.DockRow = 0;
             bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(BaseMenueBtn), new DevExpress.XtraBars.LinkPersistInfo(barDockingMenuItem1) });
+            bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(BaseMenueBtn) });
             bar2.OptionsBar.MultiLine = true;
             bar2.OptionsBar.UseWholeRow = true;
             bar2.Text = "Main menu";
             // 
-            // barButtonItem1
+            // BaseMenueBtn
             // 
-            barButtonItem1.Caption = "barButtonItem1";
-            barButtonItem1.Id = 0;
-            barButtonItem1.Name = "barButtonItem1";
-            barButtonItem1.ItemClick += barButtonItem1_ItemClick;
+            BaseMenueBtn.Caption = "اطلاعات پایه";
+            BaseMenueBtn.CausesValidation = true;
+            BaseMenueBtn.Id = 2;
+            BaseMenueBtn.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(PersonBaseBtn) });
+            BaseMenueBtn.Name = "BaseMenueBtn";
             // 
-            // barDockingMenuItem1
+            // PersonBaseBtn
             // 
-            barDockingMenuItem1.Caption = "Window";
-            barDockingMenuItem1.Id = 1;
-            barDockingMenuItem1.Name = "barDockingMenuItem1";
+            PersonBaseBtn.Caption = "اشخاص";
+            PersonBaseBtn.CloseRadialMenuOnItemClick = true;
+            PersonBaseBtn.Description = "ثبت هویت";
+            PersonBaseBtn.Id = 3;
+            PersonBaseBtn.Name = "PersonBaseBtn";
+            PersonBaseBtn.ItemClick += PersonBaseBtn_ItemClick;
             // 
             // bar3
             // 
@@ -128,6 +132,19 @@
             barDockControlRight.Manager = barManager1;
             barDockControlRight.Size = new Size(0, 404);
             // 
+            // barButtonItem1
+            // 
+            barButtonItem1.Caption = "barButtonItem1";
+            barButtonItem1.Id = 0;
+            barButtonItem1.Name = "barButtonItem1";
+            barButtonItem1.ItemClick += barButtonItem1_ItemClick;
+            // 
+            // barDockingMenuItem1
+            // 
+            barDockingMenuItem1.Caption = "Window";
+            barDockingMenuItem1.Id = 1;
+            barDockingMenuItem1.Name = "barDockingMenuItem1";
+            // 
             // documentManager1
             // 
             documentManager1.MdiParent = this;
@@ -135,24 +152,12 @@
             documentManager1.View = tabbedView1;
             documentManager1.ViewCollection.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseView[] { tabbedView1 });
             // 
-            // BaseMenueBtn
-            // 
-            BaseMenueBtn.Caption = "اطلاعات پایه";
-            BaseMenueBtn.CausesValidation = true;
-            BaseMenueBtn.Id = 2;
-            BaseMenueBtn.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(PersonBaseBtn) });
-            BaseMenueBtn.Name = "BaseMenueBtn";
-            // 
-            // PersonBaseBtn
-            // 
-            PersonBaseBtn.Caption = "اشخاص";
-            PersonBaseBtn.CloseRadialMenuOnItemClick = true;
-            PersonBaseBtn.Description = "ثبت هویت";
-            PersonBaseBtn.Id = 3;
-            PersonBaseBtn.Name = "PersonBaseBtn";
-            // 
             // ToolbarForm1
             // 
+            Appearance.BackColor = Color.Silver;
+            Appearance.ForeColor = Color.Black;
+            Appearance.Options.UseBackColor = true;
+            Appearance.Options.UseForeColor = true;
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(955, 450);
@@ -163,7 +168,9 @@
             IsMdiContainer = true;
             Name = "ToolbarForm1";
             RightToLeft = RightToLeft.Yes;
-            Text = "ToolbarForm1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "فروشگاه الماس";
+            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)barManager1).EndInit();
             ((System.ComponentModel.ISupportInitialize)documentManager1).EndInit();
             ((System.ComponentModel.ISupportInitialize)tabbedView1).EndInit();

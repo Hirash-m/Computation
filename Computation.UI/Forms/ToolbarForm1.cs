@@ -24,6 +24,11 @@ namespace Computation.UI.Forms
 
         private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
         {
+           
+        }
+
+        private void PersonBaseBtn_ItemClick(object sender, ItemClickEventArgs e)
+        {
             var personForm = new PersonsForm();
             personForm.MdiParent = this;
             personForm.Show();

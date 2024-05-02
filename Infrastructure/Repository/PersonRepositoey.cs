@@ -3,6 +3,7 @@ using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 
 
+
 namespace Infrastructure.Repository
 {
     public class PersonRepository : BaseRepository<Person, int> , IPersonRepository
@@ -42,7 +43,7 @@ namespace Infrastructure.Repository
 
         public List<Person> GetPersons()
         {
-           return ctx.Persons.Include(c=>c.Type).ToList();
+           return ctx.Persons.AsNoTracking().Include(c=>c.Type).ToList();
         }
         public Person GetPerson(int id)
         {

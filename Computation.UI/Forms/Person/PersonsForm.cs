@@ -93,7 +93,8 @@ namespace Computation.UI.Forms.Person
                 {
                     // Create a list to store the selected PersonView objects
                     List<PersonView> selectedPersons = new List<PersonView>();
-                    using (var unit = new UnitOfWork()) { 
+                    using (var unit = new UnitOfWork())
+                    {
                         foreach (int rowHandle in selectedRows)
                         {
                             PersonView selectedPerson = gridView1.GetRow(rowHandle) as PersonView;
@@ -103,11 +104,11 @@ namespace Computation.UI.Forms.Person
                                 var id = selectedPerson.ID; // Retrieve the id value
                                 unit.PersonApp.PersonDelete(id);
                                 unit.Save();
-                               
+
                             }
                         }
                     }
-                  
+
                 }
             }
         }
@@ -116,5 +117,7 @@ namespace Computation.UI.Forms.Person
         {
             DeleteSelectedRecords();
         }
+
+     
     }
 }
