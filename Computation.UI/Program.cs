@@ -4,6 +4,7 @@ using Computation.UI.Forms;
 using Computation.UI.Forms.Inventory;
 using Computation.UI.Forms.Person;
 using Computation.UI.MainData.Person;
+using OfficeOpenXml;
 
 namespace Computation.UI
 {
@@ -12,10 +13,10 @@ namespace Computation.UI
         [STAThread]
         static void Main()
         {
-           
+            ExcelPackage.LicenseContext = LicenseContext.Commercial;
 
             ApplicationConfiguration.Initialize();
-            System.Windows.Forms.Application.Run(new ToolbarForm1());
+            System.Windows.Forms.Application.Run(new XtraForm());
             
         }
     }

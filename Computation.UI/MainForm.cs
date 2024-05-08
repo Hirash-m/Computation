@@ -1,4 +1,5 @@
-﻿using Computation.UI.MainData.Person;
+﻿using Computation.UI.Forms.Person;
+using Computation.UI.MainData.Person;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,7 +26,7 @@ namespace Computation.UI
 
         private void نوعToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var personTypeForm = new PersonTypeForm();
+            var personTypeForm = new PersonTypesForm();
             personTypeForm.ShowDialog();
         }
     }
