@@ -16,7 +16,7 @@ namespace Computation.UI
             ExcelPackage.LicenseContext = LicenseContext.Commercial;
 
             ApplicationConfiguration.Initialize();
-            System.Windows.Forms.Application.Run(new XtraForm());
+            System.Windows.Forms.Application.Run(new ToolbarForm1());
             
         }
     }

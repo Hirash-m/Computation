@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Computation.UI.MainData.Person;
 
 namespace Computation.UI.Forms.Person
 {
@@ -118,6 +119,14 @@ namespace Computation.UI.Forms.Person
             DeleteSelectedRecords();
         }
 
-     
+        private void addedByExcelBTN_Click(object sender, EventArgs e)
+        {
+            XtraForm xtraForm = new XtraForm();
+            if (this.ParentForm != null)
+            {
+                xtraForm.MdiParent = this.ParentForm;
+            }
+            xtraForm.Show();
+        }
     }
 }

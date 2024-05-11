@@ -31,6 +31,10 @@
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             gridControl1 = new DevExpress.XtraGrid.GridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -38,8 +42,8 @@
             emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
@@ -50,10 +54,12 @@
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             SuspendLayout();
             // 
             // layoutControl1
             // 
+            layoutControl1.Controls.Add(simpleButton2);
             layoutControl1.Controls.Add(gridControl1);
             layoutControl1.Controls.Add(simpleButton1);
             layoutControl1.Dock = DockStyle.Fill;
@@ -76,9 +82,41 @@
             // 
             // gridView1
             // 
-            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn1, gridColumn2 });
+            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn1, gridColumn2, gridColumn3, gridColumn4 });
             gridView1.GridControl = gridControl1;
             gridView1.Name = "gridView1";
+            // 
+            // gridColumn1
+            // 
+            gridColumn1.Caption = "Name";
+            gridColumn1.FieldName = "Name";
+            gridColumn1.Name = "gridColumn1";
+            gridColumn1.Visible = true;
+            gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            gridColumn2.Caption = "Family";
+            gridColumn2.FieldName = "Family";
+            gridColumn2.Name = "gridColumn2";
+            gridColumn2.Visible = true;
+            gridColumn2.VisibleIndex = 1;
+            // 
+            // gridColumn3
+            // 
+            gridColumn3.Caption = "National code";
+            gridColumn3.FieldName = "NationalCode";
+            gridColumn3.Name = "gridColumn3";
+            gridColumn3.Visible = true;
+            gridColumn3.VisibleIndex = 2;
+            // 
+            // gridColumn4
+            // 
+            gridColumn4.Caption = "Email";
+            gridColumn4.FieldName = "Email";
+            gridColumn4.Name = "gridColumn4";
+            gridColumn4.Visible = true;
+            gridColumn4.VisibleIndex = 3;
             // 
             // repositoryItemTextEdit1
             // 
@@ -99,7 +137,7 @@
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, emptySpaceItem2, layoutControlItem2, emptySpaceItem1 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, emptySpaceItem2, layoutControlItem2, emptySpaceItem1, layoutControlItem3 });
             Root.Name = "Root";
             Root.Size = new Size(877, 391);
             Root.TextVisible = false;
@@ -116,9 +154,9 @@
             // emptySpaceItem2
             // 
             emptySpaceItem2.AllowHotTrack = false;
-            emptySpaceItem2.Location = new Point(84, 0);
+            emptySpaceItem2.Location = new Point(174, 0);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new Size(773, 26);
+            emptySpaceItem2.Size = new Size(683, 26);
             emptySpaceItem2.TextSize = new Size(0, 0);
             // 
             // layoutControlItem2
@@ -138,21 +176,24 @@
             emptySpaceItem1.Size = new Size(857, 10);
             emptySpaceItem1.TextSize = new Size(0, 0);
             // 
-            // gridColumn1
+            // simpleButton2
             // 
-            gridColumn1.Caption = "gridColumn1";
-            gridColumn1.FieldName = "Name";
-            gridColumn1.Name = "gridColumn1";
-            gridColumn1.Visible = true;
-            gridColumn1.VisibleIndex = 0;
+            simpleButton2.Location = new Point(96, 12);
+            simpleButton2.Name = "simpleButton2";
+            simpleButton2.Size = new Size(86, 22);
+            simpleButton2.StyleController = layoutControl1;
+            simpleButton2.TabIndex = 4;
+            simpleButton2.Text = "اضافه کردن";
+            simpleButton2.Click += simpleButton2_Click;
             // 
-            // gridColumn2
+            // layoutControlItem3
             // 
-            gridColumn2.Caption = "gridColumn2";
-            gridColumn2.FieldName = "Family";
-            gridColumn2.Name = "gridColumn2";
-            gridColumn2.Visible = true;
-            gridColumn2.VisibleIndex = 1;
+            layoutControlItem3.Control = simpleButton2;
+            layoutControlItem3.Location = new Point(84, 0);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new Size(90, 26);
+            layoutControlItem3.TextSize = new Size(0, 0);
+            layoutControlItem3.TextVisible = false;
             // 
             // XtraForm
             // 
@@ -172,6 +213,7 @@
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ResumeLayout(false);
         }
 
@@ -189,5 +231,9 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
     }
 }

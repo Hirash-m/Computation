@@ -39,7 +39,13 @@ namespace Application.Contracts.Person
 
     public class PersonAdd : PersonView
     {
-        public byte TypeId { get; set; }
+        private byte typeId = 54; // تنظیم مقدار پیش‌فرض برای TypeId به 1
+
+        public byte TypeId
+        {
+            get { return typeId; }
+            set { typeId = value; }
+        }
 
     }
 }

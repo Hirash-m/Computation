@@ -107,125 +107,133 @@ namespace Application
                 Phones = new List<Phone>(),
                 Addresses = new List<Address>()
             };
-            foreach (var phoneadd in personAdd.Phones)
+            if (personAdd.Phones != null)
             {
-                var phone = new Phone
+                foreach (var phoneadd in personAdd.Phones)
                 {
-                    IsMain = phoneadd.IsMain,
-                    Phone1 = phoneadd.Phone1,
-                    Type = phoneadd.Type
+                    var phone = new Phone
+                    {
+                        IsMain = phoneadd.IsMain,
+                        Phone1 = phoneadd.Phone1,
+                        Type = phoneadd.Type
+                    };
+                    newPerson.Phones.Add(phone);
                 };
-                newPerson.Phones.Add(phone);
-            };
-            // Add Addresses
-            foreach (var addressAdd in personAdd.Addresses) // Assuming 'Addresses' property exists in 'PersonAdd'
-            {
-                var address = new Address
-                {
-                    Id = addressAdd.Id,
-                    Address1 = addressAdd.Address1,
-                    RegionId = addressAdd.RegionId,
-                    IsMain = addressAdd.IsMain,
-                    TypeAdressId = addressAdd.TypeAdressId,
-                    ZipCode = addressAdd.ZipCode,
-                    Title = addressAdd.Title,
 
-                };
-                newPerson.Addresses.Add(address);
+                 }
+
+                 if (personAdd.Addresses != null)
+                {
+                    // Add Addresses
+                    foreach (var addressAdd in personAdd.Addresses) // Assuming 'Addresses' property exists in 'PersonAdd'
+                    {
+                        var address = new Address
+                        {
+                            Id = addressAdd.Id,
+                            Address1 = addressAdd.Address1,
+                            RegionId = addressAdd.RegionId,
+                            IsMain = addressAdd.IsMain,
+                            TypeAdressId = addressAdd.TypeAdressId,
+                            ZipCode = addressAdd.ZipCode,
+                            Title = addressAdd.Title,
+
+                        };
+                        newPerson.Addresses.Add(address);
+                     }
+                    }
+                    var opersation = new OperationResult();
+                    personRepository.AddPerson(newPerson);
+
+
+
+                    return opersation.Succeeded();
+                }
+
+                public OperationResult PersonEdit(PersonAdd personAdd)
+                {
+                    var operation = new OperationResult();
+                    var person = personRepository.Get(personAdd.ID);
+
+                    // Update person information
+                    person.Edit(personAdd.ID, personAdd.Name, personAdd.Family,
+                                personAdd.NationalCode, personAdd.TypeId, personAdd.Email,
+                                person.Phones, // Pass existing phones collection for now
+                                person.Addresses); // Pass existing addresses collection for now
+
+                    // Update Phones (existing code)
+                    var phonesList = personAdd.Phones.Select(p => new Infrastructure.Models.Phone
+                    {
+                        Id = p.Id,
+                        IsMain = p.IsMain,
+                        Phone1 = p.Phone1,
+                        Type = p.Type
+                    }).ToList();
+
+                    // Update existing phones or add new ones
+                    foreach (var phone in phonesList)
+                    {
+                        var existingPhone = person.Phones.FirstOrDefault(ph => ph.Id == phone.Id);
+                        if (existingPhone != null)
+                        {
+                            // Update existing phone
+                            existingPhone.IsMain = phone.IsMain;
+                            existingPhone.Phone1 = phone.Phone1;
+                            existingPhone.Type = phone.Type;
+                        }
+                        else
+                        {
+                            // Add new phone
+                            person.Phones.Add(phone);
+                        }
+                    }
+
+                    // Update Addresses (new logic)
+                    var addressesList = personAdd.Addresses.Select(a => new Infrastructure.Models.Address
+                    {
+                        // Assuming Address properties:
+                        Id = a.Id,
+                        Address1 = a.Address1,
+                        RegionId = a.RegionId,
+                        IsMain = a.IsMain,
+                        TypeAdressId = a.TypeAdressId,
+                        ZipCode = a.ZipCode,
+                        Title = a.Title,
+
+                    }).ToList();
+
+                    // Update existing addresses or add new ones
+                    foreach (var address in addressesList)
+                    {
+                        var existingAddress = person.Addresses.FirstOrDefault(a2 => a2.Id == address.Id);
+                        if (existingAddress != null)
+                        {
+                            // Update existing address
+
+                            existingAddress.Address1 = address.Address1;
+                            existingAddress.RegionId = address.RegionId;
+                            existingAddress.IsMain = address.IsMain;
+                            existingAddress.TypeAdressId = address.TypeAdressId;
+                            existingAddress.ZipCode = address.ZipCode;
+                            existingAddress.Title = address.Title;
+                        }
+                        else
+                        {
+                            // Add new address
+                            person.Addresses.Add(address);
+                        }
+                    }
+
+                    personRepository.SaveChanges();
+                    return operation.Succeeded();
+                }
+
+                public OperationResult PersonDelete(int id)
+                {
+                    var operation = new OperationResult();
+                    var person = personRepository.Get(id);
+                    if (person != null) personRepository.Delete(person);
+                    return operation.Succeeded();
+                }
             }
-            var opersation = new OperationResult();
-            personRepository.AddPerson(newPerson);
 
-
-
-            return opersation.Succeeded();
         }
-
-        public OperationResult PersonEdit(PersonAdd personAdd)
-        {
-            var operation = new OperationResult();
-            var person = personRepository.Get(personAdd.ID);
-
-            // Update person information
-            person.Edit(personAdd.ID, personAdd.Name, personAdd.Family,
-                        personAdd.NationalCode, personAdd.TypeId, personAdd.Email,
-                        person.Phones, // Pass existing phones collection for now
-                        person.Addresses); // Pass existing addresses collection for now
-
-            // Update Phones (existing code)
-            var phonesList = personAdd.Phones.Select(p => new Infrastructure.Models.Phone
-            {
-                Id = p.Id,
-                IsMain = p.IsMain,
-                Phone1 = p.Phone1,
-                Type = p.Type
-            }).ToList();
-
-            // Update existing phones or add new ones
-            foreach (var phone in phonesList)
-            {
-                var existingPhone = person.Phones.FirstOrDefault(ph => ph.Id == phone.Id);
-                if (existingPhone != null)
-                {
-                    // Update existing phone
-                    existingPhone.IsMain = phone.IsMain;
-                    existingPhone.Phone1 = phone.Phone1;
-                    existingPhone.Type = phone.Type;
-                }
-                else
-                {
-                    // Add new phone
-                    person.Phones.Add(phone);
-                }
-            }
-
-            // Update Addresses (new logic)
-            var addressesList = personAdd.Addresses.Select(a => new Infrastructure.Models.Address
-            {
-                // Assuming Address properties:
-                Id = a.Id,
-                Address1 = a.Address1,
-                RegionId = a.RegionId,
-                IsMain = a.IsMain,
-                TypeAdressId = a.TypeAdressId,
-                ZipCode = a.ZipCode,
-                Title = a.Title,
-
-            }).ToList();
-
-            // Update existing addresses or add new ones
-            foreach (var address in addressesList)
-            {
-                var existingAddress = person.Addresses.FirstOrDefault(a2 => a2.Id == address.Id);
-                if (existingAddress != null)
-                {
-                    // Update existing address
-
-                    existingAddress.Address1 = address.Address1;
-                    existingAddress.RegionId = address.RegionId;
-                    existingAddress.IsMain = address.IsMain;
-                    existingAddress.TypeAdressId = address.TypeAdressId;
-                    existingAddress.ZipCode = address.ZipCode;
-                    existingAddress.Title = address.Title;
-                }
-                else
-                {
-                    // Add new address
-                    person.Addresses.Add(address);
-                }
-            }
-
-            personRepository.SaveChanges();
-            return operation.Succeeded();
-        }
-
-        public OperationResult PersonDelete(int id)
-        {
-            var operation = new OperationResult();
-            var person = personRepository.Get(id);
-            if (person != null) personRepository.Delete(person);
-            return operation.Succeeded();
-        }
-    }
-
-}
