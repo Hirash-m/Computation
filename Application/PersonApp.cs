@@ -15,6 +15,7 @@ namespace Application
 {
     public class PersonApp : IPersonApp
     {
+        
         private readonly IPersonRepository personRepository;
 
         public PersonApp(IPersonRepository personRepository)
@@ -22,15 +23,21 @@ namespace Application
             this.personRepository = personRepository;
         }
 
-
-
-
-
-        public List<PersonView> GetPersons()
+        public int PersonCount()
         {
-            var persons = personRepository.GetPersons();
-            List<PersonView> personViews = new List<PersonView>();
+             return personRepository.CountPerson();
 
+           
+        }
+
+
+
+
+        public List<PersonView> GetPersons(int skip , int row)
+        {
+            var persons = personRepository.GetPersons(skip , row);
+            List<PersonView> personViews = new List<PersonView>();
+            
             foreach (var person in persons)
             {
                 PersonView personView = new PersonView
@@ -234,6 +241,8 @@ namespace Application
                     if (person != null) personRepository.Delete(person);
                     return operation.Succeeded();
                 }
-            }
+
+       
+    }
 
         }

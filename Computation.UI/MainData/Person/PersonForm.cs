@@ -25,7 +25,7 @@ namespace Computation.UI.MainData.Person
         private void PersonForm_Load(object sender, EventArgs e)
         {
             using (var unitOfWork= new UnitOfWork()) {
-                dataGridView1.DataSource = unitOfWork.PersonApp.GetPersons();
+                dataGridView1.DataSource = unitOfWork.PersonApp.GetPersons(10,20);
             }
         }
     }

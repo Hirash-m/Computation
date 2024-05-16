@@ -1,35 +1,35 @@
 ﻿using Application.Contracts.Person;
-using DevExpress.XtraGrid.Views.Base;
-
-using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Computation.UI.MainData.Person;
+using DevExpress.XtraTab;
+using DevExpress.XtraGrid;
+using Utility.App;
 
 namespace Computation.UI.Forms.Person
 {
     public partial class PersonsForm : DevExpress.XtraEditors.XtraForm
     {
+        private int _pageSize = 50;
+        public Pagination pagination = new Pagination();
+
+
         public PersonsForm()
         {
             InitializeComponent();
             gridView1.DoubleClick += GridView1_DoubleClick;
-
+            LoadData(); // Load the first page on initial load
         }
-
-
 
         private void GridView1_DoubleClick(object sender, EventArgs e)
         {
-            DevExpress.XtraGrid.Views.Grid.GridView view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            GridView view = sender as GridView;
 
             if (view != null)
             {
@@ -39,60 +39,45 @@ namespace Computation.UI.Forms.Person
                 {
                     view.FocusedRowHandle = hitInfo.RowHandle;
 
-                    // Get the data of the focused row
                     PersonView selectedPerson = view.GetRow(hitInfo.RowHandle) as PersonView;
 
                     if (selectedPerson != null)
                     {
                         PersonAddForm form = new PersonAddForm(selectedPerson);
+                        if(this.Parent != null) form.MdiParent = this.ParentForm;
                         form.FormClosed += ChildForm_FormClosed;
-                        form.ShowDialog();
+                        form.Show();
                     }
                 }
             }
         }
 
-
         private void PersonsForm_Load(object sender, EventArgs e)
         {
-
-            using (var unit = new UnitOfWork())
-            {
-                var persons = new BindingList<PersonView>(unit.PersonApp.GetPersons());
-
-                gridControl1.DataSource = persons;
-            }
-
-            // gridView1.Columns["ID"].OptionsColumn.AllowFocus = false;
-
+            LoadData();
         }
 
         private void AddFormShow_Click(object sender, EventArgs e)
         {
             PersonAddForm form = new PersonAddForm();
+            if (this.Parent != null) form.MdiParent = this.ParentForm;
             form.FormClosed += ChildForm_FormClosed;
-            form.ShowDialog();
+            form.Show();
         }
-
 
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            PersonsForm_Load(sender, e);
+            LoadData();
         }
-
-
-
 
         private void DeleteSelectedRecords()
         {
-            // Get the selected rows in the grid
             int[] selectedRows = gridView1.GetSelectedRows();
 
             if (selectedRows.Length > 0)
             {
                 if (MessageBox.Show("Are you sure you want to delete the selected records?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    // Create a list to store the selected PersonView objects
                     List<PersonView> selectedPersons = new List<PersonView>();
                     using (var unit = new UnitOfWork())
                     {
@@ -102,16 +87,35 @@ namespace Computation.UI.Forms.Person
 
                             if (selectedPerson != null)
                             {
-                                var id = selectedPerson.ID; // Retrieve the id value
+                                var id = selectedPerson.ID;
                                 unit.PersonApp.PersonDelete(id);
                                 unit.Save();
-
                             }
                         }
                     }
-
+                    LoadData(); // Reload data after deletion
                 }
             }
+        }
+
+        private void LoadData()
+        {
+
+
+            int skip = (_pageSize * pagination.PageIndex) - _pageSize;
+
+            using (var unit = new UnitOfWork())
+            {
+                pagination.TotalCount = unit.PersonApp.PersonCount();
+
+                BindingList<PersonView> persons = new BindingList<PersonView>(unit.PersonApp.GetPersons(pagination.Skip(), pagination.DataRow));
+                int totalCount = unit.PersonApp.PersonCount();
+                CountDataLBL.Text = totalCount.ToString();
+                gridControl1.DataSource = persons;
+                gridView1.RefreshData();
+            }
+            CountDataLBL.Text = pagination.TotalCount.ToString();
+            PageLBL.Text = pagination.PageIndex.ToString() + " / " + pagination.CalculatePageCount().ToString();
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -127,6 +131,26 @@ namespace Computation.UI.Forms.Person
                 xtraForm.MdiParent = this.ParentForm;
             }
             xtraForm.Show();
+        }
+
+        private void PageNextBTN_Click(object sender, EventArgs e)
+        {
+            if (pagination.PageIndex != pagination.CalculatePageCount())
+            {
+                pagination.PageIndex = pagination.PageIndex + 1;
+                LoadData();
+
+            }
+        }
+
+        private void PageBeforeBTN_Click(object sender, EventArgs e)
+        {
+            if (pagination.PageIndex != 1)
+            {
+                pagination.PageIndex = pagination.PageIndex - 1;
+                LoadData();
+
+            }
         }
     }
 }

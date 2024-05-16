@@ -38,6 +38,10 @@
             gridColumnEmail = new DevExpress.XtraGrid.Columns.GridColumn();
             AddFormShow = new DevExpress.XtraEditors.SimpleButton();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            PageLBL = new Label();
+            CountDataLBL = new Label();
+            PageNextBTN = new DevExpress.XtraEditors.SimpleButton();
+            PageBeforeBTN = new DevExpress.XtraEditors.SimpleButton();
             addedByExcelBTN = new DevExpress.XtraEditors.SimpleButton();
             simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -46,6 +50,11 @@
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
@@ -57,6 +66,11 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             SuspendLayout();
             // 
             // gridControl1
@@ -65,8 +79,8 @@
             gridControl1.MainView = gridView1;
             gridControl1.Name = "gridControl1";
             gridControl1.RightToLeft = RightToLeft.Yes;
-            gridControl1.Size = new Size(946, 568);
-            gridControl1.TabIndex = 3;
+            gridControl1.Size = new Size(979, 440);
+            gridControl1.TabIndex = 4;
             gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
             // gridView1
@@ -161,6 +175,10 @@
             // 
             // layoutControl1
             // 
+            layoutControl1.Controls.Add(PageLBL);
+            layoutControl1.Controls.Add(CountDataLBL);
+            layoutControl1.Controls.Add(PageNextBTN);
+            layoutControl1.Controls.Add(PageBeforeBTN);
             layoutControl1.Controls.Add(addedByExcelBTN);
             layoutControl1.Controls.Add(simpleButton1);
             layoutControl1.Controls.Add(gridControl1);
@@ -170,9 +188,45 @@
             layoutControl1.Name = "layoutControl1";
             layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(671, 0, 650, 400);
             layoutControl1.Root = Root;
-            layoutControl1.Size = new Size(970, 618);
+            layoutControl1.Size = new Size(1003, 516);
             layoutControl1.TabIndex = 2;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // PageLBL
+            // 
+            PageLBL.Location = new Point(277, 482);
+            PageLBL.Name = "PageLBL";
+            PageLBL.Size = new Size(54, 22);
+            PageLBL.TabIndex = 8;
+            PageLBL.Text = "label1";
+            // 
+            // CountDataLBL
+            // 
+            CountDataLBL.Location = new Point(217, 482);
+            CountDataLBL.Name = "CountDataLBL";
+            CountDataLBL.Size = new Size(56, 22);
+            CountDataLBL.TabIndex = 7;
+            CountDataLBL.Text = "label1";
+            // 
+            // PageNextBTN
+            // 
+            PageNextBTN.Location = new Point(121, 482);
+            PageNextBTN.Name = "PageNextBTN";
+            PageNextBTN.Size = new Size(92, 22);
+            PageNextBTN.StyleController = layoutControl1;
+            PageNextBTN.TabIndex = 6;
+            PageNextBTN.Text = "صفحه بعد>";
+            PageNextBTN.Click += PageNextBTN_Click;
+            // 
+            // PageBeforeBTN
+            // 
+            PageBeforeBTN.Location = new Point(12, 482);
+            PageBeforeBTN.Name = "PageBeforeBTN";
+            PageBeforeBTN.Size = new Size(105, 22);
+            PageBeforeBTN.StyleController = layoutControl1;
+            PageBeforeBTN.TabIndex = 5;
+            PageBeforeBTN.Text = "<صفحه قبل ";
+            PageBeforeBTN.Click += PageBeforeBTN_Click;
             // 
             // addedByExcelBTN
             // 
@@ -180,7 +234,7 @@
             addedByExcelBTN.Name = "addedByExcelBTN";
             addedByExcelBTN.Size = new Size(98, 22);
             addedByExcelBTN.StyleController = layoutControl1;
-            addedByExcelBTN.TabIndex = 4;
+            addedByExcelBTN.TabIndex = 3;
             addedByExcelBTN.Text = "اضافه کردن با اکسل";
             addedByExcelBTN.Click += addedByExcelBTN_Click;
             // 
@@ -202,9 +256,9 @@
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, emptySpaceItem1, layoutControlItem4 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, emptySpaceItem1, layoutControlItem4, layoutControlItem5, layoutControlItem6, emptySpaceItem2, layoutControlItem7, layoutControlItem8 });
             Root.Name = "Root";
-            Root.Size = new Size(970, 618);
+            Root.Size = new Size(1003, 516);
             Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -224,7 +278,7 @@
             layoutControlItem2.Control = gridControl1;
             layoutControlItem2.Location = new Point(0, 26);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new Size(950, 572);
+            layoutControlItem2.Size = new Size(983, 444);
             layoutControlItem2.TextSize = new Size(0, 0);
             layoutControlItem2.TextVisible = false;
             // 
@@ -245,7 +299,7 @@
             emptySpaceItem1.AllowHotTrack = false;
             emptySpaceItem1.Location = new Point(246, 0);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new Size(704, 26);
+            emptySpaceItem1.Size = new Size(737, 26);
             emptySpaceItem1.TextSize = new Size(0, 0);
             // 
             // layoutControlItem4
@@ -260,6 +314,56 @@
             layoutControlItem4.TextSize = new Size(0, 0);
             layoutControlItem4.TextVisible = false;
             // 
+            // layoutControlItem5
+            // 
+            layoutControlItem5.Control = PageBeforeBTN;
+            layoutControlItem5.Location = new Point(0, 470);
+            layoutControlItem5.MaxSize = new Size(109, 26);
+            layoutControlItem5.MinSize = new Size(109, 26);
+            layoutControlItem5.Name = "layoutControlItem5";
+            layoutControlItem5.Size = new Size(109, 26);
+            layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem5.TextSize = new Size(0, 0);
+            layoutControlItem5.TextVisible = false;
+            // 
+            // layoutControlItem6
+            // 
+            layoutControlItem6.Control = PageNextBTN;
+            layoutControlItem6.Location = new Point(109, 470);
+            layoutControlItem6.MaxSize = new Size(96, 26);
+            layoutControlItem6.MinSize = new Size(96, 26);
+            layoutControlItem6.Name = "layoutControlItem6";
+            layoutControlItem6.Size = new Size(96, 26);
+            layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem6.TextSize = new Size(0, 0);
+            layoutControlItem6.TextVisible = false;
+            // 
+            // emptySpaceItem2
+            // 
+            emptySpaceItem2.AllowHotTrack = false;
+            emptySpaceItem2.Location = new Point(323, 470);
+            emptySpaceItem2.Name = "emptySpaceItem2";
+            emptySpaceItem2.Size = new Size(660, 26);
+            emptySpaceItem2.TextSize = new Size(0, 0);
+            // 
+            // layoutControlItem7
+            // 
+            layoutControlItem7.Control = CountDataLBL;
+            layoutControlItem7.Location = new Point(205, 470);
+            layoutControlItem7.Name = "layoutControlItem7";
+            layoutControlItem7.Size = new Size(60, 26);
+            layoutControlItem7.TextSize = new Size(0, 0);
+            layoutControlItem7.TextVisible = false;
+            // 
+            // layoutControlItem8
+            // 
+            layoutControlItem8.Control = PageLBL;
+            layoutControlItem8.Location = new Point(265, 470);
+            layoutControlItem8.Name = "layoutControlItem8";
+            layoutControlItem8.Size = new Size(58, 26);
+            layoutControlItem8.TextSize = new Size(0, 0);
+            layoutControlItem8.TextVisible = false;
+            // 
             // simpleButton2
             // 
             simpleButton2.Location = new Point(0, 0);
@@ -272,7 +376,7 @@
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(970, 618);
+            ClientSize = new Size(1003, 516);
             Controls.Add(simpleButton2);
             Controls.Add(layoutControl1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -293,6 +397,11 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ResumeLayout(false);
         }
 
@@ -317,5 +426,14 @@
         private DevExpress.XtraEditors.SimpleButton addedByExcelBTN;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraEditors.SimpleButton PageNextBTN;
+        private DevExpress.XtraEditors.SimpleButton PageBeforeBTN;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private Label PageLBL;
+        private Label CountDataLBL;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
     }
 }

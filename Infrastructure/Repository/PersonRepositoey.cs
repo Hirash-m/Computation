@@ -41,15 +41,24 @@ namespace Infrastructure.Repository
 
         }
 
-        public List<Person> GetPersons()
+        public List<Person> GetPersons(int skip, int row)
         {
-           return ctx.Persons.AsNoTracking().Include(c=>c.Type).ToList();
+            return ctx.Persons.AsNoTracking()
+                             .Include(c => c.Type)
+                             .OrderBy(p => p.Id)
+                             .Skip(skip)
+                             .Take(row)
+                             .ToList();
         }
         public Person GetPerson(int id)
         {
             var a = ctx.Persons.Include(c => c.Type).Include(c => c.Phones).Include(c=>c.Addresses).SingleOrDefault(c => c.Id == id);
             return a;
         }
-      
+
+        int IPersonRepository.CountPerson()
+        {
+           return ctx.Persons.AsNoTracking().Count();
+        }
     }
 }

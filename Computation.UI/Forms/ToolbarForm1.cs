@@ -1,4 +1,5 @@
-﻿using Computation.UI.Forms.Person;
+﻿using Computation.UI.Forms.Inventory;
+using Computation.UI.Forms.Person;
 using Computation.UI.MainData.Person;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors.Controls;
@@ -24,7 +25,7 @@ namespace Computation.UI.Forms
 
         private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
         {
-           
+
         }
 
         private void PersonBaseBtn_ItemClick(object sender, ItemClickEventArgs e)
@@ -32,6 +33,14 @@ namespace Computation.UI.Forms
             var personForm = new PersonsForm();
             personForm.MdiParent = this;
             personForm.Show();
+        }
+
+        private void InventoryFormBTN_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var personForm = new InventoryForm();
+            personForm.MdiParent = this;
+            personForm.Show();
+
         }
     }
 }

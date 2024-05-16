@@ -111,14 +111,14 @@ namespace Computation.UI.MainData.Person
             for (int i = 0; i < personDataSource.Count; i++)
             {
                 var person = personDataSource[i];
-                //if (string.IsNullOrWhiteSpace(person.Name))
-                //{
-                //    person.Name = " ";
-                //}
-                //if (string.IsNullOrWhiteSpace(person.Family))
-                //{
-                //    person.Family = " ";
-                //}
+                if (string.IsNullOrWhiteSpace(person.Name))
+                {
+                    person.Name = " ";
+                }
+                if (string.IsNullOrWhiteSpace(person.Family))
+                {
+                    person.Family = " ";
+                }
                 try
                 {
                     using (var unit = new UnitOfWork())

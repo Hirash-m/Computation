@@ -42,6 +42,7 @@
             barDockingMenuItem1 = new DevExpress.XtraBars.BarDockingMenuItem();
             documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(components);
             tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(components);
+            InventoryFormBTN = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)documentManager1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tabbedView1).BeginInit();
@@ -55,9 +56,9 @@
             barManager1.DockControls.Add(barDockControlLeft);
             barManager1.DockControls.Add(barDockControlRight);
             barManager1.Form = this;
-            barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { barButtonItem1, barDockingMenuItem1, BaseMenueBtn, PersonBaseBtn });
+            barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { barButtonItem1, barDockingMenuItem1, BaseMenueBtn, PersonBaseBtn, InventoryFormBTN });
             barManager1.MainMenu = bar2;
-            barManager1.MaxItemId = 4;
+            barManager1.MaxItemId = 5;
             barManager1.StatusBar = bar3;
             // 
             // bar2
@@ -76,7 +77,7 @@
             BaseMenueBtn.Caption = "اطلاعات پایه";
             BaseMenueBtn.CausesValidation = true;
             BaseMenueBtn.Id = 2;
-            BaseMenueBtn.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(PersonBaseBtn) });
+            BaseMenueBtn.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(PersonBaseBtn), new DevExpress.XtraBars.LinkPersistInfo(InventoryFormBTN) });
             BaseMenueBtn.Name = "BaseMenueBtn";
             // 
             // PersonBaseBtn
@@ -152,6 +153,13 @@
             documentManager1.View = tabbedView1;
             documentManager1.ViewCollection.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseView[] { tabbedView1 });
             // 
+            // InventoryFormBTN
+            // 
+            InventoryFormBTN.Caption = "انبار";
+            InventoryFormBTN.Id = 4;
+            InventoryFormBTN.Name = "InventoryFormBTN";
+            InventoryFormBTN.ItemClick += InventoryFormBTN_ItemClick;
+            // 
             // ToolbarForm1
             // 
             Appearance.BackColor = Color.Silver;
@@ -193,5 +201,6 @@
         private DevExpress.XtraBars.BarDockingMenuItem barDockingMenuItem1;
         private DevExpress.XtraBars.BarSubItem BaseMenueBtn;
         private DevExpress.XtraBars.BarButtonItem PersonBaseBtn;
+        private DevExpress.XtraBars.BarButtonItem InventoryFormBTN;
     }
 }
