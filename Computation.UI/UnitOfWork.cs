@@ -4,6 +4,7 @@ using Application.Contracts.Inventory;
 using Application.Contracts.Person;
 using Application.Contracts.PersonType;
 using Application.Contracts.PhoneContracts;
+using Application.Contracts.ProductContract;
 using Infrastructure.IRepository;
 using Infrastructure.Models;
 using Infrastructure.Repository;
@@ -126,6 +127,26 @@ namespace Computation.UI
             db.SaveChanges();
         }
 
+        private IProductApp _productApp;
+        private IProductRepository _productRepository;
+
+        public IProductApp ProductApp
+        {
+            get
+            {
+                if (_productRepository == null)
+                {
+                    _productRepository = new ProductRepository(db);
+                }
+
+                if (_productApp == null)
+                {
+                    _productApp = new ProductApp(_productRepository);
+                }
+
+                return _productApp;
+            }
+        }
         public void Dispose()
         {
             db.Dispose();

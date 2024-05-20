@@ -42,5 +42,14 @@ namespace Computation.UI.Forms
             personForm.Show();
 
         }
+
+        private void roductFormShowBTN_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+            var personForm = new ProductForm();
+            personForm.MdiParent = this;
+            personForm.Show();
+
+        }
     }
 }

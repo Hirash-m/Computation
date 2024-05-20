@@ -33,6 +33,7 @@
             bar2 = new DevExpress.XtraBars.Bar();
             BaseMenueBtn = new DevExpress.XtraBars.BarSubItem();
             PersonBaseBtn = new DevExpress.XtraBars.BarButtonItem();
+            InventoryFormBTN = new DevExpress.XtraBars.BarButtonItem();
             bar3 = new DevExpress.XtraBars.Bar();
             barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -42,7 +43,7 @@
             barDockingMenuItem1 = new DevExpress.XtraBars.BarDockingMenuItem();
             documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(components);
             tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(components);
-            InventoryFormBTN = new DevExpress.XtraBars.BarButtonItem();
+            roductFormShowBTN = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)documentManager1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tabbedView1).BeginInit();
@@ -56,9 +57,9 @@
             barManager1.DockControls.Add(barDockControlLeft);
             barManager1.DockControls.Add(barDockControlRight);
             barManager1.Form = this;
-            barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { barButtonItem1, barDockingMenuItem1, BaseMenueBtn, PersonBaseBtn, InventoryFormBTN });
+            barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { barButtonItem1, barDockingMenuItem1, BaseMenueBtn, PersonBaseBtn, InventoryFormBTN, roductFormShowBTN });
             barManager1.MainMenu = bar2;
-            barManager1.MaxItemId = 5;
+            barManager1.MaxItemId = 6;
             barManager1.StatusBar = bar3;
             // 
             // bar2
@@ -77,7 +78,7 @@
             BaseMenueBtn.Caption = "اطلاعات پایه";
             BaseMenueBtn.CausesValidation = true;
             BaseMenueBtn.Id = 2;
-            BaseMenueBtn.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(PersonBaseBtn), new DevExpress.XtraBars.LinkPersistInfo(InventoryFormBTN) });
+            BaseMenueBtn.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(PersonBaseBtn), new DevExpress.XtraBars.LinkPersistInfo(InventoryFormBTN), new DevExpress.XtraBars.LinkPersistInfo(roductFormShowBTN) });
             BaseMenueBtn.Name = "BaseMenueBtn";
             // 
             // PersonBaseBtn
@@ -88,6 +89,13 @@
             PersonBaseBtn.Id = 3;
             PersonBaseBtn.Name = "PersonBaseBtn";
             PersonBaseBtn.ItemClick += PersonBaseBtn_ItemClick;
+            // 
+            // InventoryFormBTN
+            // 
+            InventoryFormBTN.Caption = "انبار";
+            InventoryFormBTN.Id = 4;
+            InventoryFormBTN.Name = "InventoryFormBTN";
+            InventoryFormBTN.ItemClick += InventoryFormBTN_ItemClick;
             // 
             // bar3
             // 
@@ -153,12 +161,12 @@
             documentManager1.View = tabbedView1;
             documentManager1.ViewCollection.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseView[] { tabbedView1 });
             // 
-            // InventoryFormBTN
+            // roductFormShowBTN
             // 
-            InventoryFormBTN.Caption = "انبار";
-            InventoryFormBTN.Id = 4;
-            InventoryFormBTN.Name = "InventoryFormBTN";
-            InventoryFormBTN.ItemClick += InventoryFormBTN_ItemClick;
+            roductFormShowBTN.Caption = "محصولات";
+            roductFormShowBTN.Id = 5;
+            roductFormShowBTN.Name = "roductFormShowBTN";
+            roductFormShowBTN.ItemClick += roductFormShowBTN_ItemClick;
             // 
             // ToolbarForm1
             // 
@@ -202,5 +210,6 @@
         private DevExpress.XtraBars.BarSubItem BaseMenueBtn;
         private DevExpress.XtraBars.BarButtonItem PersonBaseBtn;
         private DevExpress.XtraBars.BarButtonItem InventoryFormBTN;
+        private DevExpress.XtraBars.BarButtonItem roductFormShowBTN;
     }
 }

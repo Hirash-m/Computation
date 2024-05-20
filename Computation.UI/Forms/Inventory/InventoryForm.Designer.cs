@@ -30,18 +30,16 @@
         {
             components = new System.ComponentModel.Container();
             gridControl = new DevExpress.XtraGrid.GridControl();
-            personTypeAppBindingSource = new BindingSource(components);
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             AddRow = new DevExpress.XtraEditors.SimpleButton();
-            DeleteRow = new DevExpress.XtraEditors.SimpleButton();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            DeleteRow = new DevExpress.XtraEditors.SimpleButton();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)gridControl).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)personTypeAppBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
@@ -54,7 +52,6 @@
             // 
             // gridControl
             // 
-            gridControl.DataSource = personTypeAppBindingSource;
             gridControl.Location = new Point(12, 38);
             gridControl.MainView = gridView1;
             gridControl.Name = "gridControl";
@@ -62,10 +59,6 @@
             gridControl.Size = new Size(938, 345);
             gridControl.TabIndex = 3;
             gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
-            // 
-            // personTypeAppBindingSource
-            // 
-            personTypeAppBindingSource.DataSource = typeof(Application.PersonTypeApp);
             // 
             // gridView1
             // 
@@ -89,16 +82,6 @@
             AddRow.Text = "اضافه کردن";
             AddRow.Click += AddRow_Click;
             // 
-            // DeleteRow
-            // 
-            DeleteRow.Location = new Point(80, 12);
-            DeleteRow.Name = "DeleteRow";
-            DeleteRow.Size = new Size(67, 22);
-            DeleteRow.StyleController = layoutControl1;
-            DeleteRow.TabIndex = 2;
-            DeleteRow.Text = "حذف";
-            DeleteRow.Click += DeleteRow_Click;
-            // 
             // layoutControl1
             // 
             layoutControl1.Controls.Add(AddRow);
@@ -112,6 +95,16 @@
             layoutControl1.Size = new Size(962, 395);
             layoutControl1.TabIndex = 3;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // DeleteRow
+            // 
+            DeleteRow.Location = new Point(80, 12);
+            DeleteRow.Name = "DeleteRow";
+            DeleteRow.Size = new Size(67, 22);
+            DeleteRow.StyleController = layoutControl1;
+            DeleteRow.TabIndex = 2;
+            DeleteRow.Text = "حذف";
+            DeleteRow.Click += DeleteRow_Click;
             // 
             // Root
             // 
@@ -168,10 +161,9 @@
             Controls.Add(layoutControl1);
             MaximizeBox = false;
             Name = "InventoryForm";
-            Text = "PersonTypesForm";
+            Text = "محصولات";
             Load += InventoryForm_Load;
             ((System.ComponentModel.ISupportInitialize)gridControl).EndInit();
-            ((System.ComponentModel.ISupportInitialize)personTypeAppBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
@@ -189,7 +181,6 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.SimpleButton AddRow;
         private DevExpress.XtraEditors.SimpleButton DeleteRow;
-        private BindingSource personTypeAppBindingSource;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;

@@ -11,16 +11,18 @@ using Computation.UI.MainData.Person;
 using DevExpress.XtraTab;
 using DevExpress.XtraGrid;
 using Utility.App;
+using Computation.UI.Forms.Person;
+using Application.Contracts.ProductContract;
 
-namespace Computation.UI.Forms.Person
+namespace Computation.UI.Forms.Inventory
 {
-    public partial class PersonsForm : DevExpress.XtraEditors.XtraForm
+    public partial class ProductForm : DevExpress.XtraEditors.XtraForm
     {
         private int _pageSize = 50;
         public Pagination pagination = new Pagination();
 
 
-        public PersonsForm()
+        public ProductForm()
         {
             InitializeComponent();
             gridView1.DoubleClick += GridView1_DoubleClick;
@@ -59,7 +61,7 @@ namespace Computation.UI.Forms.Person
 
         private void AddFormShow_Click(object sender, EventArgs e)
         {
-            PersonAddForm form = new PersonAddForm();
+            ProductEditForm form = new ProductEditForm();
             if (this.Parent != null) form.MdiParent = this.ParentForm;
             form.FormClosed += ChildForm_FormClosed;
             form.Show();
@@ -108,10 +110,10 @@ namespace Computation.UI.Forms.Person
             {
                 pagination.TotalCount = unit.PersonApp.PersonCount();
 
-                BindingList<PersonView> persons = new BindingList<PersonView>(unit.PersonApp.GetPersons(pagination.Skip(), pagination.DataRow));
+                BindingList<ProductView> products = new BindingList<ProductView>(unit.ProductApp.GetProducts(pagination.Skip(), pagination.DataRow));
                 int totalCount = unit.PersonApp.PersonCount();
                 CountDataLBL.Text = totalCount.ToString();
-                gridControl1.DataSource = persons;
+                gridControl1.DataSource = products;
                 gridView1.RefreshData();
             }
             CountDataLBL.Text = pagination.TotalCount.ToString();
@@ -151,10 +153,8 @@ namespace Computation.UI.Forms.Person
                 LoadData();
 
             }
-     
+
         }
 
-        
     }
-
 }
