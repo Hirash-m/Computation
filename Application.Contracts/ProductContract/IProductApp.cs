@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,10 @@ namespace Application.Contracts.ProductContract
     {
         List<ProductView> GetProducts(int skip, int row);
         OperationResult AddProduct(ProductView command);
+        ProductView GetProduct(int productId);
+        OperationResult DeleteProduct(int productId);
+        OperationResult ProductEdit(ProductView command);
+
     }
     public class ProductView
     {
@@ -26,7 +31,7 @@ namespace Application.Contracts.ProductContract
 
         public bool SaleAble { get; set; }=true;
 
-        public byte UnitId { get; set; }
+        public byte UnitId { get; set; } = 0;
 
     }
 }

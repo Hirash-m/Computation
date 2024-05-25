@@ -1,4 +1,5 @@
 ﻿using Infrastructure.IRepository;
+using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -65,6 +66,21 @@ namespace Infrastructure.Repository
         public void SaveChanges()
         {
             context.SaveChanges();
+        }
+        public bool Update(T entities)
+        {
+            try
+            {
+                context.Update(entities);
+                var result = context.SaveChanges();
+
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception
+                return false;
+            }
         }
 
 

@@ -41,11 +41,11 @@ namespace Computation.UI.Forms.Inventory
                 {
                     view.FocusedRowHandle = hitInfo.RowHandle;
 
-                    PersonView selectedPerson = view.GetRow(hitInfo.RowHandle) as PersonView;
+                    ProductView selectedProduct = view.GetRow(hitInfo.RowHandle) as ProductView;
 
-                    if (selectedPerson != null)
+                    if (selectedProduct != null)
                     {
-                        PersonAddForm form = new PersonAddForm(selectedPerson);
+                        ProductEditForm form = new ProductEditForm(selectedProduct);
                         if (this.Parent != null) form.MdiParent = this.ParentForm;
                         form.FormClosed += ChildForm_FormClosed;
                         form.Show();
@@ -80,17 +80,17 @@ namespace Computation.UI.Forms.Inventory
             {
                 if (MessageBox.Show("Are you sure you want to delete the selected records?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    List<PersonView> selectedPersons = new List<PersonView>();
+                    List<ProductView> selectedProducts = new List<ProductView>();
                     using (var unit = new UnitOfWork())
                     {
                         foreach (int rowHandle in selectedRows)
                         {
-                            PersonView selectedPerson = gridView1.GetRow(rowHandle) as PersonView;
+                            ProductView selectedProduct = gridView1.GetRow(rowHandle) as ProductView;
 
-                            if (selectedPerson != null)
+                            if (selectedProduct != null)
                             {
-                                var id = selectedPerson.ID;
-                                unit.PersonApp.PersonDelete(id);
+                                var id = selectedProduct.Id;
+                                unit.ProductApp.DeleteProduct(id);
                                 unit.Save();
                             }
                         }

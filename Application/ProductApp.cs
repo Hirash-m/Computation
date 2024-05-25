@@ -69,5 +69,51 @@ namespace Application
             _productRepository.SaveChanges();
             return operation.Succeeded();
         }
+
+        OperationResult IProductApp.DeleteProduct(int productId)
+        {
+            OperationResult operation = new OperationResult();
+            var product = new Product() { Id = productId };
+            _productRepository.Delete(product);
+            return operation.Succeeded();
+        }
+
+        ProductView IProductApp.GetProduct(int productId)
+        {
+            var product = _productRepository.Get(productId);
+            var productView = new ProductView()
+            {
+
+                Id = productId,
+                Name = product.Name,
+                UnitPrice = product.UnitPrice,
+                SaleAble = product.SaleAble,
+                UnitId = product.UnitId,
+                LastPriceUpdate = product.LastPriceUpdate,
+
+
+            };
+            return productView;
+
+        }
+
+
+        OperationResult IProductApp.ProductEdit(ProductView command)
+        {
+            var operation = new OperationResult();
+
+            var product = _productRepository.Get(command.Id);
+            product.Name = command.Name;
+            product.UnitPrice = command.UnitPrice;
+            product.LastPriceUpdate = command.LastPriceUpdate;
+            product.IsService = command.IsService;
+            product.UnitId = command.UnitId;
+            product.SaleAble = command.SaleAble;
+
+            _productRepository.Update(product);
+            _productRepository.SaveChanges();
+
+            return operation.Succeeded();
+        }
     }
 }

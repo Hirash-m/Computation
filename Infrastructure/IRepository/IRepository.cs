@@ -19,8 +19,11 @@ namespace Infrastructure.IRepository
 
         bool Exist(Expression<Func<T, bool>> expression);
 
-     
+
         bool ExistById(TKey id);
+
+        public bool Update(T entities);
+
         void SaveChanges();
     }
 
