@@ -368,7 +368,7 @@
             MdiChildrenMinimizedAnchorBottom = false;
             Name = "ProductForm";
             RightToLeftLayout = true;
-            Text = "PersonsForm";
+            Text = "لیست محصولات";
             WindowState = FormWindowState.Maximized;
             Load += PersonsForm_Load;
             ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();

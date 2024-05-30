@@ -1,4 +1,5 @@
 ﻿using Application.Contracts.ProductContract;
+using Azure;
 using DevExpress.CodeParser;
 using DevExpress.XtraEditors;
 using System;
@@ -54,7 +55,7 @@ namespace Computation.UI.Forms.Inventory
             {
                 AddProduct();
             }
-            this.Close();
+
         }
 
 
@@ -93,8 +94,7 @@ namespace Computation.UI.Forms.Inventory
 
             if (decimal.TryParse(inputText, out decimal unitPrice))
             {
-                // در اینجا می‌توانید از متغیر unitPrice که اکنون نوع decimal استفاده کنید
-                // مثلا:
+
                 newProduct.UnitPrice = unitPrice;
             }
             else
@@ -106,8 +106,15 @@ namespace Computation.UI.Forms.Inventory
 
             using (var unit = new UnitOfWork())
             {
-                unit.ProductApp.AddProduct(newProduct);
+                var operation = unit.ProductApp.AddProduct(newProduct);
+                if (operation.IsSucceeded == true) { this.Close(); }
+                else
+                {
+                    MessageBox.Show(operation.Message, "اخطار", MessageBoxButtons.OK);
+                }
             }
+
+
         }
         void EditProduct()
         {
@@ -149,7 +156,13 @@ namespace Computation.UI.Forms.Inventory
 
             using (var unit = new UnitOfWork())
             {
-                unit.ProductApp.ProductEdit(Product);
+                var operation = unit.ProductApp.ProductEdit(Product);
+
+                if (operation.IsSucceeded == true) { this.Close(); }
+                else
+                {
+                    MessageBox.Show(operation.Message, "اخطار", MessageBoxButtons.OK);
+                }
             }
         }
     }

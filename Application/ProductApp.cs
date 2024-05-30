@@ -27,7 +27,7 @@ namespace Application
 
         public List<ProductView> GetProducts(int skip, int row)
         {
-            
+
             var products = _productRepository.GetProducts(skip, row);
             List<ProductView> productViews = new List<ProductView>();
 
@@ -35,13 +35,13 @@ namespace Application
             {
                 ProductView productView = new ProductView
                 {
-                  Id = Product.Id,
-                  Name = Product.Name,
-                    IsService=Product.IsService,
-                    UnitPrice=Product.UnitPrice,
-                    LastPriceUpdate=Product.LastPriceUpdate,
-                    SaleAble=Product.SaleAble,
-                    UnitId=Product.UnitId
+                    Id = Product.Id,
+                    Name = Product.Name,
+                    IsService = Product.IsService,
+                    UnitPrice = Product.UnitPrice,
+                    LastPriceUpdate = Product.LastPriceUpdate,
+                    SaleAble = Product.SaleAble,
+                    UnitId = Product.UnitId
 
 
                 };
@@ -54,7 +54,10 @@ namespace Application
 
         OperationResult IProductApp.AddProduct(ProductView command)
         {
+
             var operation = new OperationResult();
+            if (command.Name.Length <= 3) { return operation.Failed("مقدار نام محصول باید بیشتر از سه حرف باشد"); }
+
             var product = new Product()
             {
                 Name = command.Name,
@@ -101,19 +104,24 @@ namespace Application
         OperationResult IProductApp.ProductEdit(ProductView command)
         {
             var operation = new OperationResult();
+            if (command.Name.Length <= 3) { return operation.Failed("مقدار نام محصول باید بیشتر از سه حرف باشد"); }
 
-            var product = _productRepository.Get(command.Id);
-            product.Name = command.Name;
-            product.UnitPrice = command.UnitPrice;
-            product.LastPriceUpdate = command.LastPriceUpdate;
-            product.IsService = command.IsService;
-            product.UnitId = command.UnitId;
-            product.SaleAble = command.SaleAble;
+            else
+            {
+                var product = _productRepository.Get(command.Id);
+                product.Name = command.Name;
+                product.UnitPrice = command.UnitPrice;
+                product.LastPriceUpdate = command.LastPriceUpdate;
+                product.IsService = command.IsService;
+                product.UnitId = command.UnitId;
+                product.SaleAble = command.SaleAble;
 
-            _productRepository.Update(product);
-            _productRepository.SaveChanges();
+                _productRepository.Update(product);
+                _productRepository.SaveChanges();
 
-            return operation.Succeeded();
+                return operation.Succeeded();
+            }
         }
     }
 }
+
